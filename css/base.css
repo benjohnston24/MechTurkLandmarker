@@ -38,3 +38,7 @@ canvas {
 #confidence_box {
     display: none;
 }
+
+img {
+    padding: 10px;
+}

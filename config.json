@@ -1,148 +1,332 @@
 {
     "__message": "Please <b><a href='protocol/protocol.html' target='_blank'>read the instructions</a></b> before you start!",
-    "J1": {
+    "1": {
         "kind": "point",
         "anchor": "mouth",
         "help": "Click the tip of the upper jaw."
     },
-    "J2": {
+    "2": {
         "kind": "point",
         "anchor": "mouth",
         "help": "Click the intersection of the upper and lower jaw. (This is not simply where the skin meets! See help for details)"
     },
-    "J3": {
+    "3": {
         "kind": "point",
         "anchor": "mouth",
-        "help": "Click the tip of the lower jaw."
+        "help": "Click the tip of the upper jaw."
     },
-    "E1": {
+    "4": {
         "kind": "point",
-        "anchor": "eye",
-        "help": "Click the most anterior (forward) margin of the eye at its widest diameter."
+        "anchor": "mouth",
+        "help": "Click the intersection of the upper and lower jaw. (This is not simply where the skin meets! See help for details)"
     },
-    "E2": {
+    "5": {
         "kind": "point",
-        "anchor": "eye",
-        "help": "Click the most posterior (rearward) margin of the eye at its widest diameter."
+        "anchor": "mouth",
+        "help": "Click the tip of the upper jaw."
     },
-    "O1": {
+    "6": {
         "kind": "point",
-        "anchor": "operculum",
-        "help": "Click the top point of the preopercle. This may not be visible in certain fishes, if it is not, place the point at the top-left corner of the image and mark the point as missing below."
+        "anchor": "mouth",
+        "help": "Click the intersection of the upper and lower jaw. (This is not simply where the skin meets! See help for details)"
     },
-    "O2": {
+    "7": {
         "kind": "point",
-        "anchor": "operculum",
-        "help": "Click the posterior (rearward) \"elbow\" of the preopercle. This may not be visible in certain fishes, if it is not, place the point at the top-left corner of the image and mark the point as missing below."
+        "anchor": "mouth",
+        "help": "Click the tip of the upper jaw."
     },
-    "O3": {
+    "8": {
         "kind": "point",
-        "anchor": "operculum",
-        "help": "Click the bottom point of the preopercle. (This can also be estimated as the length of the lower jaw). This may not be visible in certain fishes, if it is not, place the point at the top-left corner of the image and mark the point as missing below."
+        "anchor": "mouth",
+        "help": "Click the intersection of the upper and lower jaw. (This is not simply where the skin meets! See help for details)"
     },
-    "O4": {
+    "9": {
         "kind": "point",
-        "anchor": "operculum",
-        "help": "Click the top point of the operculum (gill cover)."
+        "anchor": "mouth",
+        "help": "Click the tip of the upper jaw."
     },
-    "O5": {
+    "10": {
         "kind": "point",
-        "anchor": "operculum",
-        "help": "Click the posterior (rearward) point of the operculum (gill cover)."
+        "anchor": "mouth",
+        "help": "Click the intersection of the upper and lower jaw. (This is not simply where the skin meets! See help for details)"
     },
-    "P1": {
+    "11": {
         "kind": "point",
-        "anchor": "pectoral-fin",
-        "help": "Click the base of the pectoral fin's top fin ray."
+        "anchor": "mouth",
+        "help": "Click the tip of the upper jaw."
     },
-    "P2": {
+    "12": {
         "kind": "point",
-        "anchor": "pectoral-fin",
-        "help": "Click the distal tip of the pectoral fin's top fin ray."
+        "anchor": "mouth",
+        "help": "Click the intersection of the upper and lower jaw. (This is not simply where the skin meets! See help for details)"
     },
-    "P3": {
+    "13": {
         "kind": "point",
-        "anchor": "pectoral-fin",
-        "help": "Click the distal tip of the pectoral fin's bottom fin ray."
+        "anchor": "mouth",
+        "help": "Click the tip of the upper jaw."
     },
-    "P4": {
+    "14": {
         "kind": "point",
-        "anchor": "pectoral-fin",
-        "help": "Click the base of the pectoral fin's bottom fin ray."
+        "anchor": "mouth",
+        "help": "Click the intersection of the upper and lower jaw. (This is not simply where the skin meets! See help for details)"
     },
-    "D1": {
+    "15": {
         "kind": "point",
-        "anchor": "dorsal-fin",
-        "help": "Click the base of the dorsal fin's anterior (forward) fin ray."
+        "anchor": "mouth",
+        "help": "Click the tip of the upper jaw."
     },
-    "D2": {
+    "16": {
         "kind": "point",
-        "anchor": "dorsal-fin",
-        "help": "Click the distal tip of the dorsal fin's anterior (forward) fin ray."
+        "anchor": "mouth",
+        "help": "Click the intersection of the upper and lower jaw. (This is not simply where the skin meets! See help for details)"
     },
-    "D3": {
+    "17": {
         "kind": "point",
-        "anchor": "dorsal-fin",
-        "help": "Click the distal tip of the dorsal fin's posterior (rearward) fin ray."
+        "anchor": "mouth",
+        "help": "Click the tip of the upper jaw."
     },
-    "D4": {
+    "18": {
         "kind": "point",
-        "anchor": "dorsal-fin",
-        "help": "Click the base of the dorsal fin's posterior (rearward) fin ray."
+        "anchor": "mouth",
+        "help": "Click the intersection of the upper and lower jaw. (This is not simply where the skin meets! See help for details)"
     },
-    "C1": {
+    "19": {
         "kind": "point",
-        "anchor": "caudal-fin",
-        "help": "Click the base of the caudal fin's uppermost principal fin ray."
+        "anchor": "mouth",
+        "help": "Click the tip of the upper jaw."
     },
-    "C2": {
+    "20": {
         "kind": "point",
-        "anchor": "caudal-fin",
-        "help": "Click the distal tip of the caudal fin's uppermost principal fin ray."
+        "anchor": "mouth",
+        "help": "Click the intersection of the upper and lower jaw. (This is not simply where the skin meets! See help for details)"
     },
-    "C3": {
+    "21": {
         "kind": "point",
-        "anchor": "caudal-fin",
-        "help": "Click the distal tip of the caudal fin's lowermost principal fin ray."
+        "anchor": "mouth",
+        "help": "Click the tip of the upper jaw."
     },
-    "C4": {
+    "22": {
         "kind": "point",
-        "anchor": "caudal-fin",
-        "help": "Click the base of the caudal fin's lowermost principal fin ray."
+        "anchor": "mouth",
+        "help": "Click the intersection of the upper and lower jaw. (This is not simply where the skin meets! See help for details)"
     },
-    "C5": {
+    "23": {
         "kind": "point",
-        "anchor": "caudal-fin",
-        "help": "Click the midpoint of the base of the tail (between C1 and C4)."
+        "anchor": "mouth",
+        "help": "Click the tip of the upper jaw."
     },
-    "C6": {
+    "24": {
         "kind": "point",
-        "anchor": "caudal-fin",
-        "help": "Click the distal tip of the caudal fin's middle fin rays (between C2 and C3)"
+        "anchor": "mouth",
+        "help": "Click the intersection of the upper and lower jaw. (This is not simply where the skin meets! See help for details)"
     },
-    "A1": {
+    "25": {
         "kind": "point",
-        "anchor": "anal-fin",
-        "help": "Click the base of the anal fin's anterior (forward) fin ray."
+        "anchor": "mouth",
+        "help": "Click the tip of the upper jaw."
     },
-    "A2": {
+    "26": {
         "kind": "point",
-        "anchor": "anal-fin",
-        "help": "Click the distal tip of the anal fin's anterior (forward) fin ray."
+        "anchor": "mouth",
+        "help": "Click the intersection of the upper and lower jaw. (This is not simply where the skin meets! See help for details)"
     },
-    "A3": {
+    "27": {
         "kind": "point",
-        "anchor": "anal-fin",
-        "help": "Click the distal tip of the anal fin's posterior (rearward) fin ray."
+        "anchor": "mouth",
+        "help": "Click the tip of the upper jaw."
     },
-    "A4": {
+    "28": {
         "kind": "point",
-        "anchor": "anal-fin",
-        "help": "Click the base of the anal fin's posterior (rearward) fin ray."
+        "anchor": "mouth",
+        "help": "Click the intersection of the upper and lower jaw. (This is not simply where the skin meets! See help for details)"
     },
-    "V1": {
-        "kind": "line",
-        "anchor": "measurements",
-        "help": "Click and drag your estimate of the fish's max body depth (see help)."
+    "29": {
+        "kind": "point",
+        "anchor": "mouth",
+        "help": "Click the tip of the upper jaw."
+    },
+    "20": {
+        "kind": "point",
+        "anchor": "mouth",
+        "help": "Click the intersection of the upper and lower jaw. (This is not simply where the skin meets! See help for details)"
+    },
+    "31": {
+        "kind": "point",
+        "anchor": "mouth",
+        "help": "Click the tip of the upper jaw."
+    },
+    "32": {
+        "kind": "point",
+        "anchor": "mouth",
+        "help": "Click the intersection of the upper and lower jaw. (This is not simply where the skin meets! See help for details)"
+    },
+    "33": {
+        "kind": "point",
+        "anchor": "mouth",
+        "help": "Click the tip of the upper jaw."
+    },
+    "34": {
+        "kind": "point",
+        "anchor": "mouth",
+        "help": "Click the intersection of the upper and lower jaw. (This is not simply where the skin meets! See help for details)"
+    },
+    "35": {
+        "kind": "point",
+        "anchor": "mouth",
+        "help": "Click the tip of the upper jaw."
+    },
+    "36": {
+        "kind": "point",
+        "anchor": "mouth",
+        "help": "Click the intersection of the upper and lower jaw. (This is not simply where the skin meets! See help for details)"
+    },
+    "37": {
+        "kind": "point",
+        "anchor": "mouth",
+        "help": "Click the tip of the upper jaw."
+    },
+    "38": {
+        "kind": "point",
+        "anchor": "mouth",
+        "help": "Click the intersection of the upper and lower jaw. (This is not simply where the skin meets! See help for details)"
+    },
+    "39": {
+        "kind": "point",
+        "anchor": "mouth",
+        "help": "Click the tip of the upper jaw."
+    },
+    "40": {
+        "kind": "point",
+        "anchor": "mouth",
+        "help": "Click the intersection of the upper and lower jaw. (This is not simply where the skin meets! See help for details)"
+    },
+    "41": {
+        "kind": "point",
+        "anchor": "mouth",
+        "help": "Click the tip of the upper jaw."
+    },
+    "42": {
+        "kind": "point",
+        "anchor": "mouth",
+        "help": "Click the intersection of the upper and lower jaw. (This is not simply where the skin meets! See help for details)"
+    },
+    "43": {
+        "kind": "point",
+        "anchor": "mouth",
+        "help": "Click the tip of the upper jaw."
+    },
+    "44": {
+        "kind": "point",
+        "anchor": "mouth",
+        "help": "Click the intersection of the upper and lower jaw. (This is not simply where the skin meets! See help for details)"
+    },
+    "45": {
+        "kind": "point",
+        "anchor": "mouth",
+        "help": "Click the tip of the upper jaw."
+    },
+    "46": {
+        "kind": "point",
+        "anchor": "mouth",
+        "help": "Click the intersection of the upper and lower jaw. (This is not simply where the skin meets! See help for details)"
+    },
+    "47": {
+        "kind": "point",
+        "anchor": "mouth",
+        "help": "Click the tip of the upper jaw."
+    },
+    "48": {
+        "kind": "point",
+        "anchor": "mouth",
+        "help": "Click the intersection of the upper and lower jaw. (This is not simply where the skin meets! See help for details)"
+    },
+    "49": {
+        "kind": "point",
+        "anchor": "mouth",
+        "help": "Click the tip of the upper jaw."
+    },
+    "50": {
+        "kind": "point",
+        "anchor": "mouth",
+        "help": "Click the intersection of the upper and lower jaw. (This is not simply where the skin meets! See help for details)"
+    },
+    "51": {
+        "kind": "point",
+        "anchor": "mouth",
+        "help": "Click the tip of the upper jaw."
+    },
+    "52": {
+        "kind": "point",
+        "anchor": "mouth",
+        "help": "Click the intersection of the upper and lower jaw. (This is not simply where the skin meets! See help for details)"
+    },
+    "53": {
+        "kind": "point",
+        "anchor": "mouth",
+        "help": "Click the tip of the upper jaw."
+    },
+    "54": {
+        "kind": "point",
+        "anchor": "mouth",
+        "help": "Click the intersection of the upper and lower jaw. (This is not simply where the skin meets! See help for details)"
+    },
+    "55": {
+        "kind": "point",
+        "anchor": "mouth",
+        "help": "Click the tip of the upper jaw."
+    },
+    "56": {
+        "kind": "point",
+        "anchor": "mouth",
+        "help": "Click the intersection of the upper and lower jaw. (This is not simply where the skin meets! See help for details)"
+    },
+    "57": {
+        "kind": "point",
+        "anchor": "mouth",
+        "help": "Click the tip of the upper jaw."
+    },
+    "58": {
+        "kind": "point",
+        "anchor": "mouth",
+        "help": "Click the intersection of the upper and lower jaw. (This is not simply where the skin meets! See help for details)"
+    },
+    "59": {
+        "kind": "point",
+        "anchor": "mouth",
+        "help": "Click the tip of the upper jaw."
+    },
+    "60": {
+        "kind": "point",
+        "anchor": "mouth",
+        "help": "Click the intersection of the upper and lower jaw. (This is not simply where the skin meets! See help for details)"
+    },
+    "61": {
+        "kind": "point",
+        "anchor": "mouth",
+        "help": "Click the tip of the upper jaw."
+    },
+    "62": {
+        "kind": "point",
+        "anchor": "mouth",
+        "help": "Click the intersection of the upper and lower jaw. (This is not simply where the skin meets! See help for details)"
+    },
+    "63": {
+        "kind": "point",
+        "anchor": "mouth",
+        "help": "Click the tip of the upper jaw."
+    },
+    "64": {
+        "kind": "point",
+        "anchor": "mouth",
+        "help": "Click the intersection of the upper and lower jaw. (This is not simply where the skin meets! See help for details)"
+    },
+    "65": {
+        "kind": "point",
+        "anchor": "mouth",
+        "help": "Click the intersection of the upper and lower jaw. (This is not simply where the skin meets! See help for details)"
     }
+
+
+
+
 }

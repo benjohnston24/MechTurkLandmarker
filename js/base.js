@@ -10,13 +10,14 @@ function init_canvas(img) {
         var canvasbox = $("#canvasbox");
         $(".container").css("min-width", img.css("width"));
     });
-}
+};
 
 var Toolbox = (function () {
     "use strict";
     var tool_defs = {};
     var toolbox;
     var tools = {};
+
 
     function init(defs) {
         // set instance variables
@@ -36,7 +37,7 @@ var Toolbox = (function () {
                     type: "radio",
                     name: "tools",
                     value: key,
-                    id: key
+                    id: key,
                 });
                 toolbox.append(lab.append(newtool));
 
@@ -52,7 +53,9 @@ var Toolbox = (function () {
                 tools[key] = canvas[0];
 
                 // make confidences
-                if (get_param("confidence", "1") == "1") {
+                // Not using in facial landmarking
+                if (0) {
+                //if (get_param("confidence", "1") == "1") {
                     var conf = $('<div class="form-group"/>');
                     conf.append($('<label class="col-sm-2 control-label">' + key + "</label>"));
                     conf.append($('<label class="radio-inline"><input type="radio" name="' + key + '_conf" value="ok" checked>OK</label>'));
@@ -67,9 +70,10 @@ var Toolbox = (function () {
 
         var radios = $("input[type=radio]");
         radios.change(function (e) {
+            set_canvaseg(e.target.id);
             add_log("change-tool", e.target.id);
             update_submit();
-            update_help();
+            //update_help();
         });
 
         radios[0].click();
@@ -254,6 +258,11 @@ function update_help() {
     );
 }
 
+function set_canvaseg(tool){
+    $("#canvaseg").attr("src", "img/lmrk_" + tool + ".jpg");
+}
+
+
 function evt_keydown(evt) {
     "use strict";
     if (document.activeElement.nodeName === "INPUT") {
@@ -265,6 +274,7 @@ function evt_keydown(evt) {
         var idx = tools.indexOf(Toolbox.active());
         if (idx > -1 && idx < tools.length) {
             var tool = tools[idx + 1];
+            set_canvaseg(tool);
             $("#" + tool).click();
             add_log("key-forward", tool);
         }
@@ -273,6 +283,7 @@ function evt_keydown(evt) {
         var idx = tools.indexOf(Toolbox.active());
         if (idx > 0 && idx <= tools.length) {
             var tool = tools[idx - 1];
+            set_canvaseg(tool);
             $("#" + tool).click();
             add_log("key-back", tool);
         }
@@ -426,6 +437,7 @@ function load_resources(image, toolbox) {
     var wait_img = $.Deferred(function (dfd) {
         $("#canvasbg").one("load", dfd.resolve);
         $("#canvasbg").attr("src", image);
+        $("#canvaseg").attr("src", "img/lmrk_1.jpg");
     }).promise();
     var wait_tool = $.getJSON(toolbox);
     $.when(wait_img, wait_tool).then(function () {
@@ -444,13 +456,13 @@ function initialize() {
     var form = $("#mturk_form");
     form.submit(evt_submit);
 
-    load_resources(get_param("url", "protocol/fish_example.jpg"),
+    load_resources(get_param("url", "protocol/example_face.jpg"),
                    get_param("config", "config.json"));
 
-    if (get_param("taxa") !== "") {
-        $("#taxname").html("This is <i>" + get_param("taxa") + "</i>");
-        $("#taxa")[0].value = get_param("taxa");
-    }
+//    if (get_param("taxa") !== "") {
+//        $("#taxname").html("This is <i>" + get_param("taxa") + "</i>");
+//        $("#taxa")[0].value = get_param("taxa");
+//    }
 
     $("#assignmentId")[0].value = get_param("assignmentId");
     if (get_param("assignmentId") == "ASSIGNMENT_ID_NOT_AVAILABLE") {
@@ -461,13 +473,13 @@ function initialize() {
         $("canvas").css("cursor", "not-allowed");
         update_submit = function() {};
     } else {
-        add_log("init", get_param("url", "protocol/fish_example.jpg"));
+        add_log("init", get_param("url", "protocol/example_face.jpg"));
         $(".alert").hide();
         form[0].action = get_param("turkSubmitTo") + "/mturk/externalSubmit";
         update_submit();
     }
 
-    if (get_param("review") !== "") {
-        review_on(get_param("review"));
-    }
+//    if (get_param("review") !== "") {
+//        review_on(get_param("review"));
+//    }
 }
