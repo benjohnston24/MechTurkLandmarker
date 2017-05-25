@@ -1,326 +1,326 @@
 {
     "__message": "Please <b><a href='protocol/protocol.html' target='_blank'>read the instructions</a></b> before you start!",
-    "1": {
+    "P1": {
         "kind": "point",
         "anchor": "mouth",
         "help": "Click the tip of the upper jaw."
     },
-    "2": {
+    "P2": {
         "kind": "point",
         "anchor": "mouth",
         "help": "Click the intersection of the upper and lower jaw. (This is not simply where the skin meets! See help for details)"
     },
-    "3": {
+    "P3": {
         "kind": "point",
         "anchor": "mouth",
         "help": "Click the tip of the upper jaw."
     },
-    "4": {
+    "P4": {
         "kind": "point",
         "anchor": "mouth",
         "help": "Click the intersection of the upper and lower jaw. (This is not simply where the skin meets! See help for details)"
     },
-    "5": {
+    "P5": {
         "kind": "point",
         "anchor": "mouth",
         "help": "Click the tip of the upper jaw."
     },
-    "6": {
+    "P6": {
         "kind": "point",
         "anchor": "mouth",
         "help": "Click the intersection of the upper and lower jaw. (This is not simply where the skin meets! See help for details)"
     },
-    "7": {
+    "P7": {
         "kind": "point",
         "anchor": "mouth",
         "help": "Click the tip of the upper jaw."
     },
-    "8": {
+    "P8": {
         "kind": "point",
         "anchor": "mouth",
         "help": "Click the intersection of the upper and lower jaw. (This is not simply where the skin meets! See help for details)"
     },
-    "9": {
+    "P9": {
         "kind": "point",
         "anchor": "mouth",
         "help": "Click the tip of the upper jaw."
     },
-    "10": {
+    "P10": {
         "kind": "point",
         "anchor": "mouth",
         "help": "Click the intersection of the upper and lower jaw. (This is not simply where the skin meets! See help for details)"
     },
-    "11": {
+    "P11": {
         "kind": "point",
         "anchor": "mouth",
         "help": "Click the tip of the upper jaw."
     },
-    "12": {
+    "P12": {
         "kind": "point",
         "anchor": "mouth",
         "help": "Click the intersection of the upper and lower jaw. (This is not simply where the skin meets! See help for details)"
     },
-    "13": {
+    "P13": {
         "kind": "point",
         "anchor": "mouth",
         "help": "Click the tip of the upper jaw."
     },
-    "14": {
+    "P14": {
         "kind": "point",
         "anchor": "mouth",
         "help": "Click the intersection of the upper and lower jaw. (This is not simply where the skin meets! See help for details)"
     },
-    "15": {
+    "P15": {
         "kind": "point",
         "anchor": "mouth",
         "help": "Click the tip of the upper jaw."
     },
-    "16": {
+    "P16": {
         "kind": "point",
         "anchor": "mouth",
         "help": "Click the intersection of the upper and lower jaw. (This is not simply where the skin meets! See help for details)"
     },
-    "17": {
+    "P17": {
         "kind": "point",
         "anchor": "mouth",
         "help": "Click the tip of the upper jaw."
     },
-    "18": {
+    "P18": {
         "kind": "point",
         "anchor": "mouth",
         "help": "Click the intersection of the upper and lower jaw. (This is not simply where the skin meets! See help for details)"
     },
-    "19": {
+    "P19": {
         "kind": "point",
         "anchor": "mouth",
         "help": "Click the tip of the upper jaw."
     },
-    "20": {
+    "P20": {
         "kind": "point",
         "anchor": "mouth",
         "help": "Click the intersection of the upper and lower jaw. (This is not simply where the skin meets! See help for details)"
     },
-    "21": {
+    "P21": {
         "kind": "point",
         "anchor": "mouth",
         "help": "Click the tip of the upper jaw."
     },
-    "22": {
+    "P22": {
         "kind": "point",
         "anchor": "mouth",
         "help": "Click the intersection of the upper and lower jaw. (This is not simply where the skin meets! See help for details)"
     },
-    "23": {
+    "P23": {
         "kind": "point",
         "anchor": "mouth",
         "help": "Click the tip of the upper jaw."
     },
-    "24": {
+    "P24": {
         "kind": "point",
         "anchor": "mouth",
         "help": "Click the intersection of the upper and lower jaw. (This is not simply where the skin meets! See help for details)"
     },
-    "25": {
+    "P25": {
         "kind": "point",
         "anchor": "mouth",
         "help": "Click the tip of the upper jaw."
     },
-    "26": {
+    "P26": {
         "kind": "point",
         "anchor": "mouth",
         "help": "Click the intersection of the upper and lower jaw. (This is not simply where the skin meets! See help for details)"
     },
-    "27": {
+    "P27": {
         "kind": "point",
         "anchor": "mouth",
         "help": "Click the tip of the upper jaw."
     },
-    "28": {
+    "P28": {
         "kind": "point",
         "anchor": "mouth",
         "help": "Click the intersection of the upper and lower jaw. (This is not simply where the skin meets! See help for details)"
     },
-    "29": {
+    "P29": {
         "kind": "point",
         "anchor": "mouth",
         "help": "Click the tip of the upper jaw."
     },
-    "20": {
+    "P20": {
         "kind": "point",
         "anchor": "mouth",
         "help": "Click the intersection of the upper and lower jaw. (This is not simply where the skin meets! See help for details)"
     },
-    "31": {
+    "P31": {
         "kind": "point",
         "anchor": "mouth",
         "help": "Click the tip of the upper jaw."
     },
-    "32": {
+    "P32": {
         "kind": "point",
         "anchor": "mouth",
         "help": "Click the intersection of the upper and lower jaw. (This is not simply where the skin meets! See help for details)"
     },
-    "33": {
+    "P33": {
         "kind": "point",
         "anchor": "mouth",
         "help": "Click the tip of the upper jaw."
     },
-    "34": {
+    "P34": {
         "kind": "point",
         "anchor": "mouth",
         "help": "Click the intersection of the upper and lower jaw. (This is not simply where the skin meets! See help for details)"
     },
-    "35": {
+    "P35": {
         "kind": "point",
         "anchor": "mouth",
         "help": "Click the tip of the upper jaw."
     },
-    "36": {
+    "P36": {
         "kind": "point",
         "anchor": "mouth",
         "help": "Click the intersection of the upper and lower jaw. (This is not simply where the skin meets! See help for details)"
     },
-    "37": {
+    "P37": {
         "kind": "point",
         "anchor": "mouth",
         "help": "Click the tip of the upper jaw."
     },
-    "38": {
+    "P38": {
         "kind": "point",
         "anchor": "mouth",
         "help": "Click the intersection of the upper and lower jaw. (This is not simply where the skin meets! See help for details)"
     },
-    "39": {
+    "P39": {
         "kind": "point",
         "anchor": "mouth",
         "help": "Click the tip of the upper jaw."
     },
-    "40": {
+    "P40": {
         "kind": "point",
         "anchor": "mouth",
         "help": "Click the intersection of the upper and lower jaw. (This is not simply where the skin meets! See help for details)"
     },
-    "41": {
+    "P41": {
         "kind": "point",
         "anchor": "mouth",
         "help": "Click the tip of the upper jaw."
     },
-    "42": {
+    "P42": {
         "kind": "point",
         "anchor": "mouth",
         "help": "Click the intersection of the upper and lower jaw. (This is not simply where the skin meets! See help for details)"
     },
-    "43": {
+    "P43": {
         "kind": "point",
         "anchor": "mouth",
         "help": "Click the tip of the upper jaw."
     },
-    "44": {
+    "P44": {
         "kind": "point",
         "anchor": "mouth",
         "help": "Click the intersection of the upper and lower jaw. (This is not simply where the skin meets! See help for details)"
     },
-    "45": {
+    "P45": {
         "kind": "point",
         "anchor": "mouth",
         "help": "Click the tip of the upper jaw."
     },
-    "46": {
+    "P46": {
         "kind": "point",
         "anchor": "mouth",
         "help": "Click the intersection of the upper and lower jaw. (This is not simply where the skin meets! See help for details)"
     },
-    "47": {
+    "P47": {
         "kind": "point",
         "anchor": "mouth",
         "help": "Click the tip of the upper jaw."
     },
-    "48": {
+    "P48": {
         "kind": "point",
         "anchor": "mouth",
         "help": "Click the intersection of the upper and lower jaw. (This is not simply where the skin meets! See help for details)"
     },
-    "49": {
+    "P49": {
         "kind": "point",
         "anchor": "mouth",
         "help": "Click the tip of the upper jaw."
     },
-    "50": {
+    "P50": {
         "kind": "point",
         "anchor": "mouth",
         "help": "Click the intersection of the upper and lower jaw. (This is not simply where the skin meets! See help for details)"
     },
-    "51": {
+    "P51": {
         "kind": "point",
         "anchor": "mouth",
         "help": "Click the tip of the upper jaw."
     },
-    "52": {
+    "P52": {
         "kind": "point",
         "anchor": "mouth",
         "help": "Click the intersection of the upper and lower jaw. (This is not simply where the skin meets! See help for details)"
     },
-    "53": {
+    "P53": {
         "kind": "point",
         "anchor": "mouth",
         "help": "Click the tip of the upper jaw."
     },
-    "54": {
+    "P54": {
         "kind": "point",
         "anchor": "mouth",
         "help": "Click the intersection of the upper and lower jaw. (This is not simply where the skin meets! See help for details)"
     },
-    "55": {
+    "P55": {
         "kind": "point",
         "anchor": "mouth",
         "help": "Click the tip of the upper jaw."
     },
-    "56": {
+    "P56": {
         "kind": "point",
         "anchor": "mouth",
         "help": "Click the intersection of the upper and lower jaw. (This is not simply where the skin meets! See help for details)"
     },
-    "57": {
+    "P57": {
         "kind": "point",
         "anchor": "mouth",
         "help": "Click the tip of the upper jaw."
     },
-    "58": {
+    "P58": {
         "kind": "point",
         "anchor": "mouth",
         "help": "Click the intersection of the upper and lower jaw. (This is not simply where the skin meets! See help for details)"
     },
-    "59": {
+    "P59": {
         "kind": "point",
         "anchor": "mouth",
         "help": "Click the tip of the upper jaw."
     },
-    "60": {
+    "P60": {
         "kind": "point",
         "anchor": "mouth",
         "help": "Click the intersection of the upper and lower jaw. (This is not simply where the skin meets! See help for details)"
     },
-    "61": {
+    "P61": {
         "kind": "point",
         "anchor": "mouth",
         "help": "Click the tip of the upper jaw."
     },
-    "62": {
+    "P62": {
         "kind": "point",
         "anchor": "mouth",
         "help": "Click the intersection of the upper and lower jaw. (This is not simply where the skin meets! See help for details)"
     },
-    "63": {
+    "P63": {
         "kind": "point",
         "anchor": "mouth",
         "help": "Click the tip of the upper jaw."
     },
-    "64": {
+    "P64": {
         "kind": "point",
         "anchor": "mouth",
         "help": "Click the intersection of the upper and lower jaw. (This is not simply where the skin meets! See help for details)"
     },
-    "65": {
+    "P65": {
         "kind": "point",
         "anchor": "mouth",
         "help": "Click the intersection of the upper and lower jaw. (This is not simply where the skin meets! See help for details)"

@@ -150,7 +150,7 @@ function draw_point(ctx, xoff, yoff, label) {
     ctx.fillStyle = "black";
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
-    ctx.font = "5pt sans-serif";
+    ctx.font = "8pt sans-serif";
     ctx.fillText(label, xoff, yoff - pin_height - radius);
     return [xoff, yoff];
 }
@@ -259,7 +259,7 @@ function update_help() {
 }
 
 function set_canvaseg(tool){
-    $("#canvaseg").attr("src", "img/lmrk_" + tool + ".jpg");
+    $("#canvaseg").attr("src", "img/lmrk_" + tool.replace('P','') + ".jpg");
 }
 
 
