@@ -11,6 +11,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
+        <!-- Selenium is having issues from here --> 
         <link href="{% static 'FaceMarker/base.css' %}" rel="stylesheet">
         <script src="{% static 'FaceMarker/json2.js' %}"></script>
         <script src="{% static 'FaceMarker/base.js' %}"></script>
@@ -39,8 +40,6 @@
             $(document).ready(initialize("{% static 'FaceMarker/template_face.png' %}",
                                          "{% static 'FaceMarker/config.json' %}"));
         </script>
-
- 
 
     </head>
 
