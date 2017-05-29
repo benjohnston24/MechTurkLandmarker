@@ -5,10 +5,12 @@
 # Imports
 import os
 import pandas as pd
-from selenium import webdriver
+import unittest
+from selenium.webdriver.chrome.webdriver import WebDriver
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from django.test import LiveServerTestCase
+#from django.test import LiveServerTestCase
+from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from MechTurkLandmarker.settings import PAGE_TITLE
 
 
@@ -18,25 +20,26 @@ __date__ = 'Monday 29 May  16:40:16 AEST 2017'
 __license__ = 'MPL v2.0'
 
 
-class TestLoadingConfigFiles(LiveServerTestCase):
+class TestLoadingConfigFiles(StaticLiveServerTestCase):
 
     """ Test the config files are correctly loaded """
 
     @classmethod
     def setUpClass(cls):
-        super().setUpClass()
+        super(TestLoadingConfigFiles, cls).setUpClass()
 
-        cls.localhost = cls.live_server_url
-        cls.browser = webdriver.Firefox()
+        cls.browser = WebDriver()
+        cls.browser.implicitly_wait(10)
 
     @classmethod
     def tearDownClass(cls):
         cls.browser.quit()
-        super().tearDownClass()
+        super(TestLoadingConfigFiles, cls).tearDownClass()
 
     def test_page_title(self):
         """Test the page title is correctly loaded"""
 
-        self.browser.get(self.localhost)
-        WebDriverWait(self.browser, 15).until(
-           EC.title_is(PAGE_TITLE)) 
+        print(self.live_server_url)
+        self.browser.get("%s" % self.live_server_url)
+        WebDriverWait(self.browser, 10).until(
+           EC.title_contains(PAGE_TITLE)) 
