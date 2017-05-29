@@ -3,7 +3,7 @@
     <head>
         {% load static %}
         <meta charset="utf-8">
-        <title>Mark key points of a fish image</title>
+        <title>{{ page_title }}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="">
         <meta name="author" content="">
@@ -22,8 +22,8 @@
                 <h4>This is a preview.</h4> <p>Please accept the HIT before beginning work.<p></p>Recommended browsers: Firefox 42, Chrome 35, Safari 9.</p>
             </div>
             <span id="custom-message"></span>
-            <p><p>Please <b><a href="" target='_blank'>read the instructions</a></b> before you start!
-            <b>Note:</b> The zoom feature in your browser has been disabled.</p> 
+            <h2>Please <b><a href="" target='_blank'>read the instructions</a></b> before you start!</h2>
+            <p><b>Note:</b> The zoom feature in your browser has been disabled.</p> 
             <b>Keyboard shortcuts:</b> Use <code>f</code> to advance to the next step, <code>b</code> to go back.
             <div id="taxname"></div>
             <div class="btn-toolbar">
@@ -35,8 +35,8 @@
             <div id="appbox">
                         <div id="canvasbox">
                         </div>
-                        <img id="canvasbg" height="300px">
-                        <img id="canvaseg" height="300px">
+                        <img id="canvasbg" height="500px">
+                        <img id="canvaseg" height="500px">
 
                 <div id="infobox">
                     <div id="infobox-content">
