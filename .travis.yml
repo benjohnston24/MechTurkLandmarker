@@ -1,0 +1,39 @@
+sudo: true
+dist: trusty
+language: python
+python:
+    - "3.5"
+notifications:
+    email: false
+
+branches:
+    only:
+        - master
+
+addons:
+    firefox: "53.0"
+    apt:
+        sources:
+            - google-chrome
+
+        packages:
+            - google-chrome-stable
+
+before_install:
+    #    - curl -O https://chromedriver.storage.googleapis.com/2.29/chromedriver_linux64.zip && unzip -o chromedriver_linux64.zip && sudo chmod u+x chromedriver
+    - wget https://github.com/mozilla/geckodriver/releases/download/v0.16.1/geckodriver-v0.16.1-linux64.tar.gz 
+    - gunzip geckodriver-v0.16.1-linux64.tar.gz && tar -xvf geckodriver-v0.16.1-linux64.tar
+
+install:
+    - pip install -r requirements.txt
+
+before_script:
+    - export DISPLAY=:99.0
+    - export PATH=$PATH:$(pwd)
+      #    - sudo mv chromedriver /usr/local/bin
+    - sudo mv geckodriver /usr/local/bin
+    - sh -e /etc/init.d/xvfb start || echo \"Unable to start virtual display.\"
+    - sleep 3 # give xvfb some time to start
+    - python manage.py collectstatic --noinput
+
+script: make test

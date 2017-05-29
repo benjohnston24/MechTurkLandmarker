@@ -11,48 +11,10 @@ all:
 help:
 	clear \
 	&& echo "make help            - This help" \
-	&& echo "make protocol        - Protocol HTML files" \
-	&& echo "make deploy          - Deploy to GitHub" \
-	&& echo "make clean           - Deletes builds and documentation"
+	&& echo "make test            - Execute unittests" \
 
 .PHONY: clean
 
-.SUFFIXES: .html .markdown
-
-.markdown.html:
-	echo $<
-	cd $$(dirname $<) && pandoc -s $$(basename $<) --toc --self-contained -t html5 -o $$(basename $@) -c buttondown.min.css
-
-protocol: $(PROTOCOL_FILES)
-
-build:
-	mkdir -p build
-
-build/protocol:
-	mkdir -p build/protocol
-
-stage: protocol | build/ build/protocol
-	cp -R css js fonts img index.html *.json build
-	cp "$(PROTOCOL_FILES)" protocol/fish_example.jpg build/protocol
-
-deploy: stage | build/
-	( \
-		test -e build/.git \
-		&& echo "--- There is already a .git directory in build/" \
-	) \
-	|| \
-	( \
-		cd build/ \
-		&& git init . \
-		&& git add . \
-		&& touch .nojekyll \
-		&& git commit -m 'Deploy' \
-		&& git push 'git@github.com:benjohnston24/eol-mturk-landmark.git' master:gh-pages --force \
-		&& rm -rf .git \
-		&& echo "Pushed to:" \
-		&& echo "    http://jonchang.github.io/eol-mturk-landmark/" \
-	)
-
-clean:
-	rm -f protocol/protocol.html
-	rm -rf build
+test:
+	cd MechTurkLandmarker &&\
+	python manage.py test
