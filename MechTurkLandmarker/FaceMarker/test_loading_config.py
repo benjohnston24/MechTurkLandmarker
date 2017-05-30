@@ -6,11 +6,11 @@
 import os
 import pandas as pd
 import unittest
-from selenium.webdriver.chrome.webdriver import WebDriver
+from selenium.webdriver.firefox.webdriver import WebDriver
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 #from django.test import LiveServerTestCase
-from django.contrib.staticfiles.testing import StaticLiveServerTestCase
+from django.contrib.staticfiles.testing import LiveServerTestCase
 from MechTurkLandmarker.settings import PAGE_TITLE
 
 
@@ -20,7 +20,7 @@ __date__ = 'Monday 29 May  16:40:16 AEST 2017'
 __license__ = 'MPL v2.0'
 
 
-class TestLoadingConfigFiles(StaticLiveServerTestCase):
+class TestLoadingConfigFiles(LiveServerTestCase):
 
     """ Test the config files are correctly loaded """
 

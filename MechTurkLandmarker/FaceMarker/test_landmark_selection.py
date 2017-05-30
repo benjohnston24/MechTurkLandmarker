@@ -6,7 +6,7 @@
 import os
 import pandas as pd
 from django.test import LiveServerTestCase
-from selenium import webdriver
+from selenium.webdriver.firefox.webdriver import WebDriver
 
 
 __author__ = 'Ben Johnston'
@@ -24,7 +24,7 @@ class TestLandmarkSelection(LiveServerTestCase):
         super().setUpClass()
 
         cls.localhost = cls.live_server_url
-        cls.browser = webdriver.Firefox
+        cls.browswer = WebDriver()
 
     @classmethod
     def tearDownClass(cls):
