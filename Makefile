@@ -25,4 +25,4 @@ test:
 	cd MechTurkLandmarker &&\
 	python manage.py collectstatic --no-input &&\
 	coverage xml -i manage.py test --liveserver=localhost:8001-8820 &&\
-	coverage report &&\
+	coverage report
