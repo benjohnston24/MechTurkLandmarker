@@ -25,4 +25,3 @@ test:
 	@DJANGO_LOG_LEVEL=CRITICAL coverage run --source=${APPS} --omit=${OMIT} manage.py test --liveserver=localhost:8001-8020
 	#@DJANGO_LOG_LEVEL=CRITICAL coverage run --source=${APPS} --omit=${OMIT} manage.py test cpd_tracker 
 	@coverage report
-	@coverage xml -i 
