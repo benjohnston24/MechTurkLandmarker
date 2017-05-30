@@ -17,5 +17,6 @@ help:
 
 test:
 	cd MechTurkLandmarker &&\
+	python manage.py collectstatic --no-input
 	python manage.py test --liveserver=localhost:80001-8820 &&\
 	cd -
