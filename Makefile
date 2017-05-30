@@ -1,9 +1,15 @@
 # Patterned after Rust-Empty <https://github.com/bvssvni/rust-empty>, MIT License.
+# Variables ###################################################################
 SHELL := /bin/bash
 
 DEFAULT = make help
 
 PROTOCOL_FILES = protocol/protocol.html
+
+APPS=FaceMarker,MechTurkLandmarker
+OMIT=*/test*.py,*/migrations/*.py
+
+###############################################################################
 
 all:
 	$(DEFAULT)
@@ -18,5 +24,6 @@ help:
 test:
 	cd MechTurkLandmarker &&\
 	python manage.py collectstatic --no-input &&\
-	coverage run manage.py test --liveserver=localhost:8001-8820 &&\
+	coverage run --source=${APPS} --omit=${omit} manage.py test --liveserver=localhost:8001-8820 &&\
+	coverage report &&\
 	cd -
