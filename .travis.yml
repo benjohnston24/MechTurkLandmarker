@@ -39,6 +39,3 @@ before_script:
 
 script:
     - make test
-
-after_success:
-    - codecov

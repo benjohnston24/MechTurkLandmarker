@@ -29,7 +29,6 @@ class TestLoadingConfigFiles(LiveServerTestCase):
         super(TestLoadingConfigFiles, cls).setUpClass()
 
         cls.browser = WebDriver()
-        cls.browser.implicitly_wait(10)
 
     @classmethod
     def tearDownClass(cls):
@@ -41,5 +40,5 @@ class TestLoadingConfigFiles(LiveServerTestCase):
 
         print(self.live_server_url)
         self.browser.get("%s" % self.live_server_url)
-        WebDriverWait(self.browser, 10).until(
+        WebDriverWait(self.browser, 20).until(
            EC.title_contains(PAGE_TITLE)) 
