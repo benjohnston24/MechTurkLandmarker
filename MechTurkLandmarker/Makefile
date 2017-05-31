@@ -22,4 +22,5 @@ help:
 .PHONY: clean
 
 test:
-	python manage.py test
+	@DJANGO_LOG_LEVEL=CRITICAL coverage run --source=${APPS} --omit=${OMIT} manage.py test --liveserver=localhost:8001-8020
+	codecov
