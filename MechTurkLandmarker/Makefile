@@ -22,4 +22,5 @@ help:
 .PHONY: clean
 
 test:
-	coverage xml -i manage.py test --source=${APPS} --omit=${OMIT} --liveserver=localhost:8001-8820
+	coverage run --source=${APPS} --omit=${OMIT} manage.py test FaceMarker --liveserver=localhost:8001-8820
+	coverage xml -i
