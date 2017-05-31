@@ -22,5 +22,4 @@ help:
 .PHONY: clean
 
 test:
-	coverage run --source=${APPS} --omit=${OMIT} manage.py test FaceMarker
-	coverage xml -i
+	python manage.py test
