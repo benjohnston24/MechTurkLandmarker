@@ -10,7 +10,7 @@ from .generate_lmrk_images import (
     generate_lmrk_images,
 )
 
-from .generate_json_files import (
+from .generate_config_files import (
     generate_config_json,
     CONFIG_JSON,
 )

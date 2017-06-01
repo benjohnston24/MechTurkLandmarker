@@ -1,3 +1,9 @@
+[run]
+
+omit =
+    */apps.py
+    */wsgi.py
+
 [report]
 
 exclude_lines = 
