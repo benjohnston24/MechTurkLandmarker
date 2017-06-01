@@ -28,6 +28,7 @@ before_script:
     - sh -e /etc/init.d/xvfb start || echo \"Unable to start virtual display.\"
     - sleep 3 # give xvfb some time to start
     - cd MechTurkLandmarker
+    - pwd
 
 script:
     - make test
