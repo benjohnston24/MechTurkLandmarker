@@ -26,19 +26,18 @@ class TestLoadingConfigFiles(LiveServerTestCase):
 
     @classmethod
     def setUpClass(cls):
-        super(TestLoadingConfigFiles, cls).setUpClass()
+        super().setUpClass()
 
         cls.browser = WebDriver()
 
     @classmethod
     def tearDownClass(cls):
         cls.browser.quit()
-        super(TestLoadingConfigFiles, cls).tearDownClass()
+        super().tearDownClass()
 
     def test_page_title(self):
         """Test the page title is correctly loaded"""
 
-        print(self.live_server_url)
         self.browser.get("%s" % self.live_server_url)
-        WebDriverWait(self.browser, 20).until(
-           EC.title_contains(PAGE_TITLE)) 
+        WebDriverWait(self.browser, 10).until(
+            EC.title_contains(PAGE_TITLE)) 

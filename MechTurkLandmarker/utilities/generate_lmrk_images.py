@@ -52,7 +52,7 @@ def generate_lmrk_images():
             "P%d" % (i + 1),
             fill=HI_COLOUR, font=SANS16)
 
-        img.save(os.path.join(SAVE_FOLDER,"lmrk_%d.jpg" % (i + 1)))
+        img.save(os.path.join(SAVE_FOLDER,"lmrk_P%d.jpg" % (i + 1)))
 
 if __name__ == "__main__":
     generate_lmrk_images()

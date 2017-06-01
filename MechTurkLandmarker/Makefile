@@ -22,4 +22,8 @@ help:
 .PHONY: clean
 
 test:
-	coverage xml -i manage.py test --source=${APPS} --omit=${OMIT} --liveserver=localhost:8001-8820
+	python manage.py collectstatic --no-input
+	COVERAGE_FILE=.django_coverage coverage run --source=${APPS} --omit=${OMIT} manage.py test 
+	COVERAGE_FILE=.utils_coverage nosetests utilities --with-coverage --cover-package=utilities
+	coverage combine .django_coverage .utils_coverage
+	coverage xml

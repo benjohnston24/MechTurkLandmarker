@@ -65,11 +65,12 @@
             </div>
 
         </div>
+
         <!-- Selenium is having issues from here --> 
-        <link href="{% static 'FaceMarker/base.css' %}" rel="stylesheet">
-        <script src="{% static 'FaceMarker/json2.js' %}"></script>
-        <script src="{% static 'FaceMarker/base.js' %}"></script>
-        <script src="{% static 'FaceMarker/check.js' %}"></script>
+        <link href="{% static 'base.css' %}" rel="stylesheet">
+        <script src="{% static 'json2.js' %}"></script>
+        <script src="{% static 'base.js' %}"></script>
+        <script src="{% static 'check.js' %}"></script>
         <!-- Disable zooming -->
         <script>
             $(document).keydown(function(event) {
@@ -88,11 +89,11 @@
                                   event.preventDefault();
                                          }
             });
+            var example_img = "{{ eg_img }}"; 
         </script>
         <script>
-            var static_folder = "{% static '' %}";
-            $(document).ready(initialize("{% static 'template_face.png' %}",
-                                         "{% static 'config.json' %}"));
+            $(document).ready(initialize("{{ display_img }}",
+                        "{{ config }}"));
         </script>
 
 

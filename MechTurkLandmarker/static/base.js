@@ -259,7 +259,8 @@ function update_help() {
 }
 
 function set_canvaseg(tool){
-    $("#canvaseg").attr("src", static_folder + "lmrk_" + tool.replace('P','') + ".jpg");
+    $("#canvaseg").attr("src", example_img.replace(/P[0-99].jpg/g,'') + tool + '.jpg');
+    //$("#canvaseg").attr("src", static_folder + "lmrk_" + tool.replace('P','') + ".jpg");
 }
 
 
@@ -437,7 +438,7 @@ function load_resources(image, toolbox) {
     var wait_img = $.Deferred(function (dfd) {
         $("#canvasbg").one("load", dfd.resolve);
         $("#canvasbg").attr("src", image);
-        $("#canvaseg").attr("src", "img/lmrk_1.jpg");
+        $("#canvaseg").attr("src", example_img);
     }).promise();
     var wait_tool = $.getJSON(toolbox);
     $.when(wait_img, wait_tool).then(function () {

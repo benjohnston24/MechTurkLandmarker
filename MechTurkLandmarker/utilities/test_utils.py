@@ -31,7 +31,7 @@ class TestGenImages(unittest.TestCase):
         self.assertEqual(mock_img.call_count, 2)
         for i in range(2):
             mock_img.call_args_list[i].assert_called_with(
-                os.path.join(SAVE_FOLDER, 'lmrk_%d.jpg' % i))
+                os.path.join(SAVE_FOLDER, 'lmrk_P%d.jpg' % i))
 
 
 class TestGenJSON(unittest.TestCase):
