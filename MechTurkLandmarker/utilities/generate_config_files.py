@@ -40,6 +40,8 @@ TEMPLATES = {
     X: X_TEMPLATE,
     Y: Y_TEMPLATE,
 }
+JS_END = "    return acc;\n}"
+
 
 def generate_config_json():
     """Generate a json file containing the number of points"""
@@ -90,8 +92,6 @@ def generate_javascript_check(buff=0.1):
     js_contents = ""
     for direction in [X, Y]:
         template = TEMPLATES[direction]
-        js_contents += "    //{} coordinates\n".\
-            format(DIRECTIONS[direction])
         for rule in rules[direction]:
             js_contents += \
                 template.substitute(
@@ -99,7 +99,7 @@ def generate_javascript_check(buff=0.1):
                     X2=rule[1] + 1)
 
     # Finish the file and close
-    js_contents += "    return acc;\n}"
+    js_contents += JS_END
 
     with open(CHECK_JS, "a") as f:
         f.write(js_contents)

@@ -12,5 +12,11 @@ from .generate_lmrk_images import (
 
 from .generate_config_files import (
     generate_config_json,
+    generate_javascript_check,
     CONFIG_JSON,
+    CHECK_JS,
+    CHECK_JS_INTRO,
+    X_TEMPLATE,
+    Y_TEMPLATE,
+    JS_END,
 )
