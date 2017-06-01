@@ -39,5 +39,5 @@ class TestLoadingConfigFiles(LiveServerTestCase):
         """Test the page title is correctly loaded"""
 
         self.browser.get("%s" % self.live_server_url)
-        WebDriverWait(self.browser, 10).until(
+        WebDriverWait(self.browser, 20).until(
             EC.title_contains(PAGE_TITLE)) 
