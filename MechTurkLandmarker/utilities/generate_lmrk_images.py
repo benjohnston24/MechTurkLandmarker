@@ -8,7 +8,6 @@
 import os
 import pandas as pd
 from PIL import Image, ImageDraw, ImageFont
-from MechTurkLandmarker.settings import STATICFILES_DIRS
 
 
 __author__ = 'Ben Johnston'
@@ -20,8 +19,8 @@ __license__ = 'BSD 3-Clause'
 RADIUS = 3 
 BASE_COLOUR = (255, 0, 0) 
 HI_COLOUR = (255, 255, 0)
-SAVE_FOLDER = STATICFILES_DIRS[0]
 UTIL_FOLDER = os.path.dirname(os.path.abspath(__file__))
+SAVE_FOLDER = os.path.join(os.path.dirname(UTIL_FOLDER), 'static')
 TEMPLATE_FACE = os.path.join(UTIL_FOLDER, "template_face.png")
 LMRKS_FILE = os.path.join(UTIL_FOLDER, "template_landmarks.csv")
 FONT_FILE = os.path.join(UTIL_FOLDER, 'DejaVuSans.ttf')

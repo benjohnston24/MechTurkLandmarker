@@ -41,10 +41,8 @@ js_landmarks = pd.DataFrame(
 [
     [100, 200],
     [101, 402],
-    [301, 403],
-    [302, 503],
     [402, 603],
-    [102, 603],
+    [302, 603],
 ])
 
 class TestGenConfig(unittest.TestCase):
@@ -84,12 +82,16 @@ class TestGenConfig(unittest.TestCase):
 
             # Generate data string
             expected_results = ""
+            expected_results += X_TEMPLATE.substitute(X1=3, X2=1)
+            expected_results += X_TEMPLATE.substitute(X1=4, X2=1)
             expected_results += X_TEMPLATE.substitute(X1=3, X2=2)
-            expected_results += X_TEMPLATE.substitute(X1=5, X2=4)
-            expected_results += X_TEMPLATE.substitute(X1=5, X2=6)
+            expected_results += X_TEMPLATE.substitute(X1=4, X2=2)
+            expected_results += X_TEMPLATE.substitute(X1=3, X2=4)
             expected_results += Y_TEMPLATE.substitute(X1=2, X2=1)
-            expected_results += Y_TEMPLATE.substitute(X1=4, X2=3)
-            expected_results += Y_TEMPLATE.substitute(X1=5, X2=4)
+            expected_results += Y_TEMPLATE.substitute(X1=3, X2=1)
+            expected_results += Y_TEMPLATE.substitute(X1=4, X2=1)
+            expected_results += Y_TEMPLATE.substitute(X1=3, X2=2)
+            expected_results += Y_TEMPLATE.substitute(X1=4, X2=2)
             expected_results += JS_END;
 
             handle.write.assert_any_call(expected_results)

@@ -129,8 +129,8 @@ function clear_canvas(ctx) {
 
 function draw_point(ctx, xoff, yoff, label) {
     "use strict";
-    var radius = 6;
-    var pin_height = 12;
+    var radius = 3;
+    var pin_height = 2;
     ctx.strokeStyle = "cyan";
     ctx.lineWidth = 2;
     ctx.fillStyle = "white";
@@ -147,10 +147,10 @@ function draw_point(ctx, xoff, yoff, label) {
     ctx.stroke();
     ctx.closePath();
 
-    ctx.fillStyle = "black";
+    ctx.fillStyle = "red";
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
-    ctx.font = "8pt sans-serif";
+    ctx.font = "10pt sans-serif";
     ctx.fillText(label, xoff, yoff - pin_height - radius);
     return [xoff, yoff];
 }
