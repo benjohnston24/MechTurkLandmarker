@@ -36,8 +36,6 @@ class TestLoadingConfigFiles(LiveServerTestCase):
         cls.browser.quit()
         super().tearDownClass()
 
-    
-    @skip("Debug something weird with Travis CI here")
     def test_page_title(self):
         """Test the page title is correctly loaded"""
 
