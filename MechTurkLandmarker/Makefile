@@ -22,4 +22,4 @@ help:
 .PHONY: clean
 
 test:
-	COVERAGE_FILE=.coverage_django coverage xml -i manage.py test --source=${APPS} --omit=${OMIT} --liveserver=localhost:8001-8820
+	coverage xml -i manage.py test --source=${APPS} --omit=${OMIT} --liveserver=localhost:8001-8820
