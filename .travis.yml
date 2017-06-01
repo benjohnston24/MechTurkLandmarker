@@ -38,4 +38,6 @@ before_script:
     - cd MechTurkLandmarker
 
 script:
-    - make test
+    - coverage run --source=${APPS} --omit=${OMIT} manage.py test --liveserver=localhost:8001-8020
+    - codecov
+
