@@ -22,26 +22,29 @@ help:
 .PHONY: clean
 
 build:
-	python utilities/generate_lmrk_images.py
-	python utilities/generate_config_files.py
+	cd MechTurkLandmarker &&\
+	python utilities/generate_lmrk_images.py &&\
+	python utilities/generate_config_files.py &&\
 	python manage.py collectstatic --no-input
 
 test:
-	echo $(pwd)
-	python utilities/generate_lmrk_images.py
-	python utilities/generate_config_files.py
-	python manage.py collectstatic --no-input
-	COVERAGE_FILE=.django_coverage coverage run --source=${APPS} --omit=${OMIT} manage.py test 
-	COVERAGE_FILE=.utils_coverage nosetests utilities --with-coverage --cover-package=utilities
-	coverage combine .django_coverage .utils_coverage
+	cd MechTurkLandmarker &&\
+	python utilities/generate_lmrk_images.py &&\
+	python utilities/generate_config_files.py &&\
+	python manage.py collectstatic --no-input &&\
+	COVERAGE_FILE=.django_coverage coverage run --source=${APPS} --omit=${OMIT} manage.py test  &&\
+	COVERAGE_FILE=.utils_coverage nosetests utilities --with-coverage --cover-package=utilities &&\
+	coverage combine .django_coverage .utils_coverage &&\
 	coverage xml
 
 run:
-	python manage.py collectstatic --no-input
+	cd MechTurkLandmarker &&\
+	python manage.py collectstatic --no-input &&\
 	python manage.py runserver
 
 
 clean:
+	cd MechTurkLandmarker &&\
 	rm static/*.jpg
 	rm static/check.js
 	rm staticfiles/*.*
