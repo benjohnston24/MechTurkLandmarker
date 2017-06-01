@@ -32,6 +32,11 @@ test:
 	coverage combine .django_coverage .utils_coverage
 	coverage xml
 
+run:
+	python manage.py collectstatic --no-input
+	python manage.py runserver
+
+
 clean:
 	rm static/*.jpg
 	rm static/check.js
