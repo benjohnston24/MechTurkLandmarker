@@ -27,6 +27,7 @@ build:
 	python manage.py collectstatic --no-input
 
 test:
+	echo $(pwd)
 	python utilities/generate_lmrk_images.py
 	python utilities/generate_config_files.py
 	python manage.py collectstatic --no-input
