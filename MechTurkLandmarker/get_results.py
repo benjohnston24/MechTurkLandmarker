@@ -29,7 +29,7 @@ mturk = boto3.client('mturk',
     aws_secret_access_key = aws_secret_access_key,
 )
 # Use the hit_id previously created
-hit_id = "3QE4DGPGBRTI7WJ814FYHA08DAM4GO"
+hit_id = "3E22YV8GG1OA6HMDMSKHASK05I4PN8"
 
 # We are only publishing this task to one Worker
 # So we will get back an array with one item if it has been completed

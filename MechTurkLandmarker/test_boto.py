@@ -21,7 +21,7 @@ mturk = boto3.client('mturk',
 # This will return $10,000.00 in the MTurk Developer Sandbox
 print(mturk.get_account_balance()['AvailableBalance'])
 
-with open('question.xml', 'r') as f:
+with open('ExternalQuestion.xml', 'r') as f:
     question = f.read()
 
 new_hit = mturk.create_hit(

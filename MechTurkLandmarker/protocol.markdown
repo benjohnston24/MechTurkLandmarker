@@ -5,6 +5,11 @@
 [comment]: <> (LICENSE: BSD 3-clause)
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<style>
+img {
+    border: 5px solid;
+}
+</style>
 <div class="container">
 # MechanicalTurk Facial Landmarking Task
 ## Introduction
@@ -20,9 +25,16 @@ You should also notice that the example image illustrates the point that is
 currently selected for positioning (see example below) and when you select a different point the image and guidance
 will change correspondingly.
 
-![Example Image](static/lmrk_P14.jpg)
+![example image](static/lmrk_P14.jpg)
 
-Once you have marked **ALL** 66 points you will have completed the task and......
+If you have accidentally placed a point in an invalid position you may see a message similar to that shown in the image
+below.  You must correct these warnings before you can submit the task.
+
+![example warning](static/example_warning.png)
+
+Once you have marked **ALL** 66 points you will have completed the task and a submit button will be available.
+
+![submit task](static/submit_task_btn.png)
 
 ## Consent
 This information will be used for academic research, by completing this task you are giving permission for the
