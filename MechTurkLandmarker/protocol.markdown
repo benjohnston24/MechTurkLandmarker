@@ -1,0 +1,34 @@
+[comment]: <> (Markdown document for Task Protocol)
+[comment]: <> (use make protocol to build and install the protocol as an html page)
+[comment]: <> (Ben Johnston)
+[comment]: <> (Friday 2 June  10:54:33 AEST 2017)
+[comment]: <> (LICENSE: BSD 3-clause)
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<div class="container">
+# MechanicalTurk Facial Landmarking Task
+## Introduction
+
+During this task you will be marking 66 points on an image of a face using the provided web based interface.  To start
+the process you simply need to click on the button for the first point P1, then using the mouse select the corresponding
+point on the photograph of the face.
+
+![button image](static/example_btn.png)
+
+The smaller example image to the left provides some guidance as to the correct, approximate location of each point.
+You should also notice that the example image illustrates the point that is
+currently selected for positioning (see example below) and when you select a different point the image and guidance
+will change correspondingly.
+
+![Example Image](static/lmrk_P14.jpg)
+
+Once you have marked **ALL** 66 points you will have completed the task and......
+
+## Consent
+This information will be used for academic research, by completing this task you are giving permission for the
+information you have provided during this exercise to be used for this purpose.
+
+## Contact Information
+If you have any further questions you can contact......
+
+</div>

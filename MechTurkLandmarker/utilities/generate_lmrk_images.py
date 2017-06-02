@@ -51,6 +51,12 @@ def generate_lmrk_images():
             "P%d" % (i + 1),
             fill=HI_COLOUR, font=SANS16)
 
+        draw.text((10, 10),
+            "DO NOT CLICK ON THIS IMAGE",
+            fill=BASE_COLOUR, font=SANS16)
+
+
+
         img.save(os.path.join(SAVE_FOLDER,"lmrk_P%d.jpg" % (i + 1)))
 
 if __name__ == "__main__":
