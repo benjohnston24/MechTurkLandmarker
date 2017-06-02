@@ -3,6 +3,7 @@
 
 # Django static files
 */staticfiles/*
+MechTurkLandmarker/static/lmrk_P*
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

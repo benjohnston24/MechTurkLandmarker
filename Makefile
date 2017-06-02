@@ -24,9 +24,7 @@ help:
 all: build
 
 build:
-	cd MechTurkLandmarker &&\
-	python utilities/generate_lmrk_images.py &&\
-	python utilities/generate_config_files.py
+	cd MechTurkLandmarker && python build_utils.py
 
 test: build
 	cd MechTurkLandmarker &&\
