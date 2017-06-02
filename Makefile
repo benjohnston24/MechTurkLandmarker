@@ -21,30 +21,20 @@ help:
 
 .PHONY: clean
 
+all: build
+
 build:
 	cd MechTurkLandmarker &&\
 	python utilities/generate_lmrk_images.py &&\
-	python utilities/generate_config_files.py &&\
-	python manage.py collectstatic --no-input
+	python utilities/generate_config_files.py
 
-test:
+test: build
 	cd MechTurkLandmarker &&\
-	python utilities/generate_lmrk_images.py &&\
-	python utilities/generate_config_files.py &&\
-	python manage.py collectstatic --no-input &&\
-	COVERAGE_FILE=.django_coverage coverage run --source=${APPS} --omit=${OMIT} manage.py test  &&\
-	COVERAGE_FILE=.utils_coverage nosetests utilities --with-coverage --cover-package=utilities &&\
-	coverage combine .django_coverage .utils_coverage &&\
+	nosetests utilities --with-coverage --cover-package=utilities &&\
 	coverage xml
-
-run:
-	cd MechTurkLandmarker &&\
-	python manage.py collectstatic --no-input &&\
-	python manage.py runserver
-
 
 clean:
 	cd MechTurkLandmarker &&\
+	rm .coverage
 	rm static/*.jpg
 	rm static/check.js
-	rm staticfiles/*.*

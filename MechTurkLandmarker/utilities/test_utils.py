@@ -82,16 +82,10 @@ class TestGenConfig(unittest.TestCase):
 
             # Generate data string
             expected_results = ""
-            expected_results += X_TEMPLATE.substitute(X1=3, X2=1)
-            expected_results += X_TEMPLATE.substitute(X1=4, X2=1)
             expected_results += X_TEMPLATE.substitute(X1=3, X2=2)
-            expected_results += X_TEMPLATE.substitute(X1=4, X2=2)
             expected_results += X_TEMPLATE.substitute(X1=3, X2=4)
             expected_results += Y_TEMPLATE.substitute(X1=2, X2=1)
-            expected_results += Y_TEMPLATE.substitute(X1=3, X2=1)
-            expected_results += Y_TEMPLATE.substitute(X1=4, X2=1)
             expected_results += Y_TEMPLATE.substitute(X1=3, X2=2)
-            expected_results += Y_TEMPLATE.substitute(X1=4, X2=2)
             expected_results += JS_END;
 
             handle.write.assert_any_call(expected_results)

@@ -14,8 +14,10 @@
     <body>
         <div class="container">
 
+            <h2>Face Landmarking Task</h2>
             <div class="alert alert-error">
-                <h4>This is a preview.</h4> <p>Please accept the HIT before beginning work.<p></p>Recommended browsers: Firefox 42, Chrome 35, Safari 9.</p>
+                <h5>This is a preview.</h5><p>Please accept the HIT before beginning work.<p></p>Recommended browsers:
+                Firefox 42, Chrome 35, Safari 9, or later.</p>
             </div>
             <span id="custom-message"></span>
             <h2>Please <b><a href="" target='_blank'>read the instructions</a></b> before you start!</h2>
@@ -31,7 +33,7 @@
             <div id="appbox">
                         <div id="canvasbox">
                         </div>
-                        <img id="canvasbg" height="700px">
+                        <img id="canvasbg" height="600px">
                         <img id="canvaseg" height="400px">
 
                 <div id="infobox">
@@ -91,7 +93,7 @@
             var example_img = "./static/lmrk_P1.jpg"; 
         </script>
         <script>
-            $(document).ready(initialize("./static/template_face.png",
+            $(document).ready(initialize("./static/display_image.jpg",
                         "./static/config.json"));
         </script>
    </body>

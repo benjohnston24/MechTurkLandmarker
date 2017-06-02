@@ -76,20 +76,20 @@ def generate_javascript_check(buff=0.1):
     rules[X] = []
     rules[Y] = []
     # Iterate each point, comparing against the previous
-    for i in range(0, df.shape[0]):
-        for j in range(0, df.shape[0]):
-            ratios = df[i] / (df[j] + eps)
+    for i in range(1, df.shape[0]):
+        j = i - 1
+        ratios = df[i] / (df[j] + eps)
 
-            for direction in [X, Y]:
-                # The directional distance between the points is big enough to validate
-                if abs(1 - ratios[direction]) >= buff:
-                    #Check which is smallest and apply the rule 
-                    if df[i][direction] > df[j][direction]:
-                        if [i, j] not in rules[direction]:
-                            rules[direction].append([i, j])
-                    else:
-                        if [j, i] not in rules[direction]:
-                            rules[direction].append([j, i])
+        for direction in [X, Y]:
+            # The directional distance between the points is big enough to validate
+            if abs(1 - ratios[direction]) >= buff:
+                #Check which is smallest and apply the rule 
+                if df[i][direction] > df[j][direction]:
+                    if [i, j] not in rules[direction]:
+                        rules[direction].append([i, j])
+                else:
+                    if [j, i] not in rules[direction]:
+                        rules[direction].append([j, i])
 
     # Generate javascript statements
     js_contents = ""

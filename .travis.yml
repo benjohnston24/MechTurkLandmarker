@@ -9,6 +9,7 @@ notifications:
 branches:
     only:
         - master
+        - simplify
 
 addons:
     firefox: "53.0"
