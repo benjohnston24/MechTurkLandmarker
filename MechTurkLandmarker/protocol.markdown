@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <style>
 img {
-    border: 5px solid;
+    border: 2px solid;
 }
 </style>
 <div class="container">
@@ -36,11 +36,15 @@ Once you have marked **ALL** 66 points you will have completed the task and a su
 
 ![submit task](static/submit_task_btn.png)
 
+## HIT Approval
+We require that workers only complete this HIT once.  Please note that if you have completed this HIT multiple times,
+only one HIT will be approved.
+
 ## Consent
-This information will be used for academic research, by completing this task you are giving permission for the
+This information will be used for academic research, by accepting this HIT you are giving permission for the
 information you have provided during this exercise to be used for this purpose.
 
 ## Contact Information
-If you have any further questions you can contact......
+If you have any further questions you can contact us directly through the Mechanical Turk *Contact Requester* link
 
 </div>
