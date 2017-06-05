@@ -21,15 +21,15 @@ mturk = boto3.client('mturk',
 # This will return $10,000.00 in the MTurk Developer Sandbox
 print(mturk.get_account_balance()['AvailableBalance'])
 
-with open('question.xml', 'r') as f:
+with open('ExternalQuestion.xml', 'r') as f:
     question = f.read()
 
 new_hit = mturk.create_hit(
-    Title = 'Is this Tweet happy, angry, excited, scared, annoyed or upset?',
-    Description = 'Read this tweet and type out one word to describe the emotion of the person posting it: happy, angry, scared, annoyed or upset',
-    Keywords = 'text, quick, labelling',
+    Title = 'Facial Landmarking',
+    Description = 'Identify specified points on a face',
+    Keywords = 'image, face, landmark, labelling',
     Reward = '0.15',
-    MaxAssignments = 1,
+    MaxAssignments = 10,
     LifetimeInSeconds = 172800,
     AssignmentDurationInSeconds = 600,
     AutoApprovalDelayInSeconds = 14400,
