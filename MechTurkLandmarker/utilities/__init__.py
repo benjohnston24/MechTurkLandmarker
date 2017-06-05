@@ -1,4 +1,4 @@
-from .generate_lmrk_images import (
+from utilities.generate_lmrk_images import (
     SAVE_FOLDER,
     TEMPLATE_FACE,
     LMRKS_FILE,
@@ -10,7 +10,7 @@ from .generate_lmrk_images import (
     generate_lmrk_images,
 )
 
-from .generate_config_files import (
+from utilities.generate_config_files import (
     generate_config_json,
     generate_javascript_check,
     CONFIG_JSON,
