@@ -36,18 +36,3 @@ file_list = ['index.html']
 for upload_name in file_list:
     print(upload_name)
     S3.upload_file(upload_name, BUCKET_NAME, upload_name, ExtraArgs={'ContentType': 'text/html', 'ACL': 'public-read'}) 
-    # Update permissions
-
-import sys;sys.exit()
-# Enable Website Configuration
-# Create the configuration for the website
-website_configuration = {
-    'ErrorDocument': {'Key': 'error.html'},
-    'IndexDocument': {'Suffix': 'index.html'},
-}
-
-# Set the new policy on the selected bucket
-S3.put_bucket_website(
-    Bucket='my-bucket',
-    WebsiteConfiguration=website_configuration
-)

@@ -118,3 +118,5 @@ class TestAWSUtils(unittest.TestCase):
         self.assertEqual(config['AWS-MTURK']['HIT_ASSIGNDUR'], '600')
         self.assertEqual(config['AWS-MTURK']['HIT_AUTOAPPROVEDELAY'], '14400')
         self.assertEqual(config['AWS-MTURK']['HIT_FRAMEHEIGHT'], '800')
+        self.assertEqual(config['KEYS']['AWS-ID'], '1234')
+        self.assertEqual(config['KEYS']['AWS-KEY'], '456')

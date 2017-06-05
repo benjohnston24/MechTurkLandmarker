@@ -62,6 +62,11 @@ def parse_sys_config(config_file=DEFAULT_SYS_CONFIG):
             'HIT_ASSIGNDUR': config['AWS-MTURK']['HIT_AssignmentDurationInSeconds'],
             'HIT_AUTOAPPROVEDELAY': config['AWS-MTURK']['HIT_AutoApprovalDelayInSeconds'],
             'HIT_FRAMEHEIGHT': config['AWS-MTURK']['HIT_Frame_Height'],
-        }
+        },
+        'KEYS':
+        {
+            'AWS-ID': AWS_ACCESS_KEY_ID,
+            'AWS-KEY': AWS_SECRET_ACCESS_KEY, 
+        },
     }
     return data

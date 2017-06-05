@@ -27,9 +27,9 @@ build:
 	cd MechTurkLandmarker && python build_utils.py &&\
 		python -m markdown -o html protocol.markdown > protocol.html
 
-test: build
+test: 
 	cd MechTurkLandmarker &&\
-	nosetests --with-coverage --cover-package=utilities &&\
+	MECHTURK_ID=1234 MECHTURK_KEY=456 nosetests --with-coverage --cover-package=utilities &&\
 	coverage xml -i
 
 clean:

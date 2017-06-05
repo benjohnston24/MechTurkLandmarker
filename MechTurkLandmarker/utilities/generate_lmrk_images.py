@@ -8,6 +8,7 @@
 import os
 import pandas as pd
 from PIL import Image, ImageDraw, ImageFont
+from utilities.aws_base import parse_sys_config 
 
 
 __author__ = 'Ben Johnston'
@@ -16,18 +17,33 @@ __date__ = 'Sunday 28 May  21:16:33 AEST 2017'
 __license__ = 'BSD 3-Clause'
 
 
-RADIUS = 3 
-BASE_COLOUR = (255, 0, 0) 
-HI_COLOUR = (255, 255, 0)
 UTIL_FOLDER = os.path.dirname(os.path.abspath(__file__))
 SAVE_FOLDER = os.path.join(os.path.dirname(UTIL_FOLDER), 'static')
-TEMPLATE_FACE = os.path.join(UTIL_FOLDER, "template_face.png")
-LMRKS_FILE = os.path.join(UTIL_FOLDER, "template_landmarks.csv")
 FONT_FILE = os.path.join(UTIL_FOLDER, 'DejaVuSans.ttf')
+DEFAULT_LMRKS_FILE = os.path.join(UTIL_FOLDER, "template_landmarks.csv")
+
 
 SANS16 = ImageFont.truetype(FONT_FILE, 25)
 
-def generate_lmrk_images():
+def generate_lmrk_images(config):
+    """Generate the images to indicate the current point to be landmarked"""
+
+    # Check the details of the config file
+    RADIUS = config['LANDMARK-DETAILS']['Radius']
+    BASE_COLOUR = config['LANDMARK-DETAILS']['BaseColour']
+    HI_COLOUR = config['LANDMARK-DETAILS']['HighlightColour']
+
+    if 'TemplateImage' in config['LANDMARK-DETAILS']:
+        TEMPLATE_FACE = config['LANDMARK-DETAILS']['TemplateImage']
+    else:
+        TEMPLATE_FACE = os.path.join(UTIL_FOLDER, "template_face.png")
+
+    if 'TemplateLandmarks' in config['LANDMARK-DETAILS']:
+        LMRKS_FILE = config['LANDMARK-DETAILS']['TemplateLandmarks']
+    else:
+        LMRKS_FILE = os.path.join(UTIL_FOLDER, "template_landmarks.csv")
+
+
     # Load landmarks
     lmrks = pd.read_csv(LMRKS_FILE).values
 
@@ -55,9 +71,8 @@ def generate_lmrk_images():
             "DO NOT CLICK ON THIS IMAGE",
             fill=BASE_COLOUR, font=SANS16)
 
-
-
         img.save(os.path.join(SAVE_FOLDER,"lmrk_P%d.jpg" % (i + 1)))
 
 if __name__ == "__main__":
-    generate_lmrk_images()
+    config = parse_sys_config()
+    generate_lmrk_images(config)

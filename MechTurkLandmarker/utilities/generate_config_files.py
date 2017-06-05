@@ -11,7 +11,7 @@ import os
 import pandas as pd
 import numpy as np
 from string import Template
-from . import SAVE_FOLDER, LMRKS_FILE
+from . import SAVE_FOLDER
 from collections import OrderedDict
 
 __author__ = 'Ben Johnston'
@@ -43,7 +43,7 @@ TEMPLATES = {
 JS_END = "    return acc;\n}"
 
 
-def generate_config_json():
+def generate_config_json(config):
     """Generate a json file containing the number of points"""
 
     df = pd.read_csv(LMRKS_FILE).values
