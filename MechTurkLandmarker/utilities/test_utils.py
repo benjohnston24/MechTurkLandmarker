@@ -12,7 +12,7 @@ import numpy as nps
 import pandas as pd
 from collections import OrderedDict
 from unittest.mock import MagicMock, patch
-from utilities import generate_lmrk_images,\
+from . import generate_lmrk_images,\
     generate_config_json, SAVE_FOLDER,\
     CONFIG_JSON, CHECK_JS,\
     generate_javascript_check,\

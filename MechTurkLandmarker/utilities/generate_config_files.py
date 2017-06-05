@@ -11,7 +11,7 @@ import os
 import pandas as pd
 import numpy as np
 from string import Template
-from utilities import SAVE_FOLDER, LMRKS_FILE
+from . import SAVE_FOLDER, LMRKS_FILE
 from collections import OrderedDict
 
 __author__ = 'Ben Johnston'
