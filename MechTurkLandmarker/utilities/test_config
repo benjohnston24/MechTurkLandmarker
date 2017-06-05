@@ -1,0 +1,36 @@
+[AWS-S3]
+BucketName = turklandmarker
+Region = us-west-2
+ACL = public-read
+
+[AWS-MTURK]
+EndPoint = https://mturk-requester-sandbox.us-east-1.amazonaws.com
+# Uncomment the next line for production use
+# EndPoint = https://mturk-requester.us-east-1.amazonaws.com
+Region = us-east-1
+
+# HIT Details
+HIT_Title = Facial Landmarking
+HIT_Description = Identify specified points on a face
+
+# Payment per HIT (AWS fees not included)
+HIT_Reward = 0.15
+
+# Number of times the HIT can be completed before
+# it expires
+HIT_Max_Assignments = 10
+
+# Time allowed to complete the HIT in seconds
+# 
+HIT_LifetimeInSeconds = 172800
+
+# Time allowed to complete task
+HIT_AssignmentDurationInSeconds = 600
+
+# Time delay to approve an answer in seconds
+# If you do not approve an answer it will be automatically
+# approved after this time
+HIT_AutoApprovalDelayInSeconds = 14400
+
+# The Frame Height for the HIT
+HIT_Frame_Height = 800

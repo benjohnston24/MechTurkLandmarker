@@ -17,7 +17,8 @@ from . import generate_lmrk_images,\
     CONFIG_JSON, CHECK_JS,\
     generate_javascript_check,\
     CHECK_JS_INTRO, X_TEMPLATE,\
-    Y_TEMPLATE, JS_END
+    Y_TEMPLATE, JS_END,\
+    parse_sys_config, DEFAULT_SYS_CONFIG
 
 
 __author__ = 'Ben Johnston'
@@ -89,3 +90,31 @@ class TestGenConfig(unittest.TestCase):
             expected_results += JS_END;
 
             handle.write.assert_any_call(expected_results)
+
+class TestAWSUtils(unittest.TestCase):
+
+    def test_default_config_exists(self):
+        """Test the default config file exists"""
+
+        self.assertTrue(os.path.exists(DEFAULT_SYS_CONFIG))
+
+    def test_read_config(self):
+        """Check config file read"""
+
+        config = parse_sys_config(
+            os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                'test_config')
+        )
+        self.assertEqual(config['AWS-S3']['BUCKET_NAME'], 'turklandmarker')
+        self.assertEqual(config['AWS-S3']['REGION'], 'us-west-2')
+        self.assertEqual(config['AWS-S3']['ACL'], 'public-read')
+        self.assertEqual(config['AWS-MTURK']['END_POINT'], 'https://mturk-requester-sandbox.us-east-1.amazonaws.com')
+        self.assertEqual(config['AWS-MTURK']['REGION'], 'us-east-1')
+        self.assertEqual(config['AWS-MTURK']['HIT_TITLE'], 'Facial Landmarking')
+        self.assertEqual(config['AWS-MTURK']['HIT_DESC'], 'Identify specified points on a face')
+        self.assertEqual(config['AWS-MTURK']['HIT_REWARD'], '0.15')
+        self.assertEqual(config['AWS-MTURK']['HIT_MAXASSIGN'], '10')
+        self.assertEqual(config['AWS-MTURK']['HIT_LIFE'], '172800')
+        self.assertEqual(config['AWS-MTURK']['HIT_ASSIGNDUR'], '600')
+        self.assertEqual(config['AWS-MTURK']['HIT_AUTOAPPROVEDELAY'], '14400')
+        self.assertEqual(config['AWS-MTURK']['HIT_FRAMEHEIGHT'], '800')
