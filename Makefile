@@ -28,8 +28,8 @@ build:
 
 test: build
 	cd MechTurkLandmarker &&\
-	nosetests utilities --with-coverage --cover-package=utilities &&\
-	coverage xml
+	nosetests --with-coverage --cover-package=utilities &&\
+	coverage xml -i
 
 clean:
 	cd MechTurkLandmarker &&\
