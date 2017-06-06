@@ -5,7 +5,8 @@
 """Script to manage AWS buckets to host the site"""
 
 # Imports
-from . import parse_sys_config
+from utilities.base import parse_sys_config, UTIL_FOLDER,\
+    DEFAULT_SYS_CONFIG
 import boto3
 
 __author__ = 'Ben Johnston'
