@@ -3,7 +3,6 @@ BucketName = turklandmarker
 Region = us-west-2
 ACL = public-read
 
-
 [LANDMARK-DETAILS]
 Radius = 3
 # Colours represented as hex format
