@@ -1,3 +1,24 @@
+[LANDMARK-DETAILS]
+Radius = 3
+# Colours represented as hex format
+BaseColour = #FF0000
+HighlightColour = #FFFF00
+
+# Complete path to the template image
+# Uncomment to use otherwise default is stored in
+# utilities/template_face.png
+# TemplateImage = template_face.png
+
+# Complete path to template landmarks
+# Uncomment to use otherwise default is stored in
+# utilities/template_landmarks.csv
+# TemplateLandmarks = template_landmarks.csv
+
+# Complete path to folder where to save static files
+# Uncomment to use otherwise default is 
+# MechTurkLandmarker/static
+# StaticFolder = ./static
+
 [AWS-S3]
 BucketName = turklandmarker
 Region = us-west-2

@@ -7,19 +7,24 @@
 # Imports
 import os
 import unittest
-from unittest.mock import mock_open
+from unittest import skip
+from unittest.mock import Mock, mock_open
 import numpy as nps
 import pandas as pd
 from collections import OrderedDict
 from unittest.mock import MagicMock, patch
-from . import generate_lmrk_images,\
-    generate_config_json, SAVE_FOLDER,\
-    CONFIG_JSON, CHECK_JS,\
-    generate_javascript_check,\
-    CHECK_JS_INTRO, X_TEMPLATE,\
-    Y_TEMPLATE, JS_END,\
-    parse_sys_config, DEFAULT_SYS_CONFIG
+from utilities.base import parse_sys_config,\
+    DEFAULT_SYS_CONFIG, UTIL_FOLDER,\
+    DEFAULT_SAVE_FOLDER
 
+from utilities.generate_config_files import \
+    generate_config_json,\
+    generate_javascript_check,\
+    CHECK_JS_INTRO, X_TEMPLATE, Y_TEMPLATE,\
+    JS_END
+
+from utilities.generate_lmrk_images import \
+    generate_lmrk_images
 
 __author__ = 'Ben Johnston'
 __revision__ = '0.1'
@@ -30,13 +35,24 @@ class TestGenImages(unittest.TestCase):
 
     @patch('pandas.read_csv', return_value=pd.DataFrame([[1,2],[3,4]]))
     @patch('PIL.Image.Image.save')
-    def test_correct_num_images_produces(self, mock_img, mock_pts):
+    @patch('utilities.generate_lmrk_images.parse_sys_config', return_value={
+            'LANDMARK-DETAILS': {
+                'TEMPLATE_FACE': os.path.join(UTIL_FOLDER, 'template_face.png'), 
+                'TEMPLATE_LANDMARKS': os.path.join(UTIL_FOLDER, 'template_landmarks.csv'), 
+                'STATIC_FOLDER': DEFAULT_SAVE_FOLDER,
+                'RADIUS': 3, 
+                'BASE_COLOUR': '#FFFFFF', 
+                'HI_COLOUR': '#FFFFFF', 
+                }
+            }
+        )
+    def test_correct_num_images_produces(self, mock_config, mock_img, mock_pts):
 
         generate_lmrk_images()
         self.assertEqual(mock_img.call_count, 2)
         for i in range(2):
             mock_img.call_args_list[i].assert_called_with(
-                os.path.join(SAVE_FOLDER, 'lmrk_P%d.jpg' % i))
+                os.path.join(DEFAULT_SAVE_FOLDER, 'lmrk_P%d.jpg' % i))
 
 js_landmarks = pd.DataFrame(
 [
@@ -51,12 +67,22 @@ class TestGenConfig(unittest.TestCase):
     @patch('pandas.read_csv', return_value=pd.DataFrame([[1,2],[3,4]]))
     @patch('json.dump')
     @patch('builtins.open')
-    def test_correct_json_points(self, mock_file, mock_json, mock_pts):
+    @patch('utilities.generate_config_files.parse_sys_config', return_value={
+            'LANDMARK-DETAILS': {
+                'TEMPLATE_LANDMARKS': os.path.join(UTIL_FOLDER, 'template_landmarks.csv'), 
+                'CONFIG_JSON': os.path.join(DEFAULT_SAVE_FOLDER, 'config.json'),
+                }
+            }
+        )
+    def test_correct_json_points(self, mock_config, mock_file, mock_json, mock_pts):
         """Test the config.json file is correctly generated"""
+
         generate_config_json()
 
         # Test file open
-        mock_file.assert_called_with(CONFIG_JSON, 'w')
+        mock_file.assert_called_with(
+            os.path.join(DEFAULT_SAVE_FOLDER, 'config.json'),
+            'w')
 
         # Test json dump
         expected_results = OrderedDict()
@@ -68,7 +94,16 @@ class TestGenConfig(unittest.TestCase):
         self.assertEqual(mock_json.call_args_list[0][1], {'indent': 4})
 
     @patch('pandas.read_csv', return_value=js_landmarks) 
-    def test_correct_javascript_rules(self, mock_pts):
+    @patch('utilities.generate_config_files.parse_sys_config', return_value={
+            'LANDMARK-DETAILS': {
+                'TEMPLATE_LANDMARKS': os.path.join(UTIL_FOLDER, 'template_landmarks.csv'), 
+                'CHECK_JS': os.path.join(DEFAULT_SAVE_FOLDER, 'check.js'),
+                }
+            }
+        )
+    def test_correct_javascript_rules(self, mock_config, mock_pts):
+
+        CHECK_JS = os.path.join(DEFAULT_SAVE_FOLDER, 'check.js')
 
         mock_file = mock_open()
         with patch('builtins.open', mock_file, create=True):
@@ -103,7 +138,7 @@ class TestAWSUtils(unittest.TestCase):
 
         config = parse_sys_config(
             os.path.join(os.path.dirname(os.path.abspath(__file__)),
-                'test_config')
+                'testconfig')
         )
         self.assertEqual(config['AWS-S3']['BUCKET_NAME'], 'turklandmarker')
         self.assertEqual(config['AWS-S3']['REGION'], 'us-west-2')

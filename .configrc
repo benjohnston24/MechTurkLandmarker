@@ -1,3 +1,9 @@
+[AWS-S3]
+BucketName = turklandmarker
+Region = us-west-2
+ACL = public-read
+
+
 [LANDMARK-DETAILS]
 Radius = 3
 # Colours represented as hex format
@@ -14,10 +20,10 @@ HighlightColour = #FFFF00
 # utilities/template_landmarks.csv
 # TemplateLandmarks = template_landmarks.csv
 
-[AWS-S3]
-BucketName = turklandmarker
-Region = us-west-2
-ACL = public-read
+# Complete path to folder where to save static files
+# Uncomment to use otherwise default is 
+# MechTurkLandmarker/static
+# StaticFolder = ./static
 
 [AWS-MTURK]
 EndPoint = https://mturk-requester-sandbox.us-east-1.amazonaws.com

@@ -19,7 +19,7 @@ def create_bucket(config):
 #    S3 = boto3.client(
 
 
-if __name__ == "__main__":
+#if __name__ == "__main__":
 
     # Read the system config
 

@@ -11,17 +11,15 @@ import os
 import pandas as pd
 import numpy as np
 from string import Template
-from . import SAVE_FOLDER
 from collections import OrderedDict
+from utilities.base import parse_sys_config, UTIL_FOLDER,\
+    DEFAULT_SYS_CONFIG
 
 __author__ = 'Ben Johnston'
 __revision__ = '0.1'
 __date__ = 'Thursday 1 June  10:36:54 AEST 2017'
 __license__ = 'BSD 3-Clause'
 
-
-CONFIG_JSON = os.path.join(SAVE_FOLDER, "config.json")
-CHECK_JS = os.path.join(SAVE_FOLDER, "check.js")
 
 # X, Y coords 
 X = 0
@@ -43,8 +41,12 @@ TEMPLATES = {
 JS_END = "    return acc;\n}"
 
 
-def generate_config_json(config):
+def generate_config_json(config_file=DEFAULT_SYS_CONFIG):
     """Generate a json file containing the number of points"""
+
+    config = parse_sys_config(config_file)
+    LMRKS_FILE = config['LANDMARK-DETAILS']['TEMPLATE_LANDMARKS']
+    CONFIG_JSON = config['LANDMARK-DETAILS']['CONFIG_JSON']
 
     df = pd.read_csv(LMRKS_FILE).values
     num_pts = df.shape[0]
@@ -55,7 +57,7 @@ def generate_config_json(config):
     with open(CONFIG_JSON, 'w') as f:
         json.dump(json_data, f, indent=4)
 
-def generate_javascript_check(buff=0.1):
+def generate_javascript_check(config_file=DEFAULT_SYS_CONFIG, buff=0.1):
     """Generate the check.js file 
 
     buff: as a percentage
@@ -63,6 +65,11 @@ def generate_javascript_check(buff=0.1):
     then do not apply the positional requirement
 
     """
+
+    config = parse_sys_config(config_file)
+    LMRKS_FILE = config['LANDMARK-DETAILS']['TEMPLATE_LANDMARKS']
+    CHECK_JS = config['LANDMARK-DETAILS']['CHECK_JS']
+
     assert((buff > 0) and (buff <= 1))
     eps = np.finfo('float').eps
     # Write the intro to file

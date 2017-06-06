@@ -16,8 +16,8 @@ all:
 
 help:
 	clear \
-	&& echo "make help            - This help" \
-	&& echo "make test            - Execute unittests" \
+	&& echo "make help - This help" \
+	&& echo "make test - Execute unittests" \
 
 .PHONY: clean
 
@@ -29,7 +29,7 @@ build:
 
 test: 
 	cd MechTurkLandmarker &&\
-	MECHTURK_ID=1234 MECHTURK_KEY=456 nosetests --with-coverage --cover-package=utilities &&\
+	MECHTURK_ID=1234 MECHTURK_KEY=456 nosetests -s --with-coverage --cover-package=utilities &&\
 	coverage xml -i
 
 clean:
