@@ -33,6 +33,7 @@ Region = us-east-1
 # HIT Details
 HIT_Title = Facial Landmarking
 HIT_Description = Identify specified points on a face
+HIT_Keywords = facial, landmarking, image, points
 
 # Payment per HIT (AWS fees not included)
 HIT_Reward = 0.15

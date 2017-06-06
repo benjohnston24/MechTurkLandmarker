@@ -7,7 +7,6 @@
 # Imports
 import configparser
 import os
-from string import Template
 
 __author__ = 'Ben Johnston'
 __revision__ = '0.1'
@@ -26,13 +25,6 @@ DEFAULT_SYS_CONFIG = os.path.join(DEFAULT_SYS_CONFIG, '.configrc')
 
 AWS_ACCESS_KEY_ID = os.getenv('MECHTURK_ID') 
 AWS_SECRET_ACCESS_KEY = os.getenv('MECHTURK_KEY') 
-
-EXTERNAL_Q_TEMPLATE = Template(
-"""<ExternalQuestion xmlns="http://mechanicalturk.amazonaws.com/AWSMechanicalTurkDataSchemas/2006-07-14/ExternalQuestion.xsd">
-      <ExternalURL>$url</ExternalURL>
-      <FrameHeight>$frame_height</FrameHeight>
-</ExternalQuestion>
-""")
 
 
 def parse_sys_config(config_file=DEFAULT_SYS_CONFIG, defaults=True):
@@ -66,6 +58,7 @@ def parse_sys_config(config_file=DEFAULT_SYS_CONFIG, defaults=True):
             'REGION': config['AWS-MTURK']['Region'],
             'HIT_TITLE': config['AWS-MTURK']['HIT_Title'],
             'HIT_DESC': config['AWS-MTURK']['HIT_Description'],
+            'HIT_KEYWORDS': config['AWS-MTURK']['HIT_Keywords'],
             'HIT_REWARD': config['AWS-MTURK']['HIT_Reward'],
             'HIT_MAXASSIGN': config['AWS-MTURK']['HIT_Max_Assignments'],
             'HIT_LIFE': config['AWS-MTURK']['HIT_LifetimeInSeconds'],

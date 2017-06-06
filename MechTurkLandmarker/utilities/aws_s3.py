@@ -2,12 +2,11 @@
 # -*- coding: utf-8 -*-
 # S.D.G
 
-"""Script to manage AWS buckets to host the site"""
+"""Class to upload files to AWS S3 bucket"""
 
 # Imports
 import boto3
 import os
-import xmltodict
 from utilities.base import parse_sys_config, UTIL_FOLDER,\
     DEFAULT_SYS_CONFIG
 
@@ -19,6 +18,7 @@ __license__ = 'MPL v2.0'
 
 CONTENT_TYPES = {
     '.html': 'text/html',
+    '.css' : 'text/css',
     '.jpg' : 'image/jpg',
     '.jpeg': 'image/jpeg',
     '.png' : 'image/png',
@@ -38,21 +38,42 @@ class AWSS3(object):
 
         self.debug_level = debug_level
         self.config = parse_sys_config(config_file)
+        self.index_file = 'index.html'
+        self.protocol_file = 'protocol.html'
+        self.error_file = 'error.html'
+        self.connected = False
 
+        self.html_files = [
+            self.index_file,
+            self.protocol_file
+            self.error_file
+            ]
+
+        self.index_link = "https://s3-%s.amazonaws.com/%s/%s" % (
+            self.config['AWS-S3']['REGION'],
+            self.config['AWS-S3']['BUCKET_NAME'],
+            self.index_file)
+
+    def connect(self):
+        """Connect""" 
         self.s3 = boto3.client('s3',
             region_name=self.config['AWS-S3']['REGION'],
             aws_access_key_id=self.config['KEYS']['AWS-ID'],
             aws_secret_access_key=self.config['KEYS']['AWS-KEY'],
         )
 
-        self.html_files = [
-            'index.html',
-            'protocol.html',
-            'error.html',
-            ]
+        self.connected = True
+
+
+    def generate_bucket_link(self):
+
+        return "https://s3-%s.amazonaws.com/%s/%s"
 
     def create_bucket(self):
         """Create the bucket on AWS S3"""
+
+        if not self.connected:
+            self.connect()
 
         bucket_name = self.config['AWS-S3']['BUCKET_NAME']
         buckets = self.s3.list_buckets()['Buckets']
@@ -77,6 +98,9 @@ class AWSS3(object):
     def upload_files(self):
         """Upload files to bucket""" 
 
+        if not self.connected:
+            self.connect()
+
         static_folder = self.config['LANDMARK-DETAILS']['STATIC_FOLDER']
         static_base = os.path.basename(static_folder)
 
@@ -98,16 +122,22 @@ class AWSS3(object):
             if self.debug_level:
                 print("Uploading: %s" % upload_name)
             filename, ext = os.path.splitext(upload_name)
+            if ext in CONTENT_TYPES:
+                content_type = CONTENT_TYPES[ext]
+            else:
+                content_type = 'text/plain'
+                if self.debug_level:
+                    print("Unknown file extension")
+
             self.s3.upload_file(
                 upload_name,
                 self.config['AWS-S3']['BUCKET_NAME'],
                 upload_key,
                 ExtraArgs={
-                    'ContentType': CONTENT_TYPES[ext],
-                    'ACL': 'public-read',
+                    'ContentType': content_type,
+                    'ACL': self.config['AWS-S3']['ACL'],
                 },
             ) 
-
 
 if __name__ == "__main__":
     s3 = AWSS3() 
