@@ -18,6 +18,7 @@ __license__ = 'MPL v2.0'
 UTIL_FOLDER = os.path.dirname(os.path.abspath(__file__))
 DEFAULT_LMRKS_FILE = os.path.join(UTIL_FOLDER, "template_landmarks.csv")
 DEFAULT_SAVE_FOLDER = os.path.join(os.path.dirname(UTIL_FOLDER), 'static')
+DEFAULT_RESULTS_FOLDER = os.path.join(os.path.dirname(UTIL_FOLDER), 'results')
 DEFAULT_SYS_CONFIG = os.path.join(
     os.path.dirname(
     os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
@@ -101,6 +102,13 @@ def parse_sys_config(config_file=DEFAULT_SYS_CONFIG, defaults=True):
         else:
             data['LANDMARK-DETAILS']['STATIC_FOLDER'] =\
                 config['LANDMARK-DETAILS']['StaticFolder']
+
+        if 'ResultsFolder' not in config['LANDMARK-DETAILS']:
+            data['LANDMARK-DETAILS']['RESULTS_FOLDER'] =\
+                DEFAULT_RESULTS_FOLDER
+        else:
+            data['LANDMARK-DETAILS']['RESULTS_FOLDER'] =\
+                config['LANDMARK-DETAILS']['ResultsFolder']
 
         if 'ConfigJSON' not in config['LANDMARK-DETAILS']:
             data['LANDMARK-DETAILS']['CONFIG_JSON'] =\

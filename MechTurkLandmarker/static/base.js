@@ -236,6 +236,10 @@ var logger_data = [];
 
 function update_data(name, value) {
     "use strict";
+    //Subtract image padding
+    var img = $("#canvasbg");
+    value[0] = value[0] - parseInt(img.css('padding-left'));
+    value[1] = value[1] - parseInt(img.css('padding-top'));
     landmark_data[name] = value;
     $("#form-marks")[0].value = JSON.stringify(landmark_data);
     update_submit();

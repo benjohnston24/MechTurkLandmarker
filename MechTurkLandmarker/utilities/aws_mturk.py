@@ -8,7 +8,12 @@
 import boto3
 import os
 import xmltodict
+import json
+import pandas as pd
+from collections import OrderedDict
+from ast import literal_eval
 from string import Template
+from datetime import datetime
 from utilities.base import parse_sys_config, UTIL_FOLDER,\
     DEFAULT_SYS_CONFIG
 
@@ -89,8 +94,105 @@ class AWSMturk(object):
 
         return self.external_question 
 
+    def list_HITS(self):
+        """List the currently submitted HITS"""
+
+        if not self.connected:
+            self.connect()
+
+        hits = self.mturk.list_hits()
+        hit_summary = []
+
+        for hit in hits['HITs']:
+            hit_summary.append((
+                hit['HITId'],
+                hit['Title'],
+                hit['Description'],
+                )
+            )
+        return hit_summary
+
+    def get_results(self, hit_id, 
+        status=['Submitted', 'Approved', 'Rejected']):
+        """Get the results for a particular HIT""" 
+
+        if not self.connected:
+            self.connect()
+
+        results = self.mturk.list_assignments_for_hit(
+            HITId=hit_id,
+            AssignmentStatuses=status)
+
+        return results
+
+    def save_results_to_file(self, hit_id,
+        status=['Submitted', 'Approved', 'Rejected']):
+        """Save the results to a file"""
+
+        results_folder = self.config['LANDMARK-DETAILS']['RESULTS_FOLDER']
+        # If the folder doesnt exist, make it
+        if not os.path.exists(results_folder):
+            os.mkdir(results_folder)
+
+        # Create a HIT specific folder in the results folder
+        hit_results_folder = os.path.join(results_folder, hit_id)
+        if not os.path.exists(hit_results_folder):
+            os.mkdir(hit_results_folder)
+
+        hit_results = self.get_results(hit_id, status)
+
+        results = []
+        marks = None
+        for hit_result in hit_results['Assignments']:
+            savename = "{}_{}".format(
+                    datetime.now().strftime("%Y-%m-%d-%H:%M:%S"),
+                    hit_result['WorkerId'])
+            savename = os.path.join(hit_results_folder, savename)
+            result_dict = {}
+            result_dict['WorkerId'] = hit_result['WorkerId']
+            result_dict['AssignmentId'] = hit_result['AssignmentId']
+            result_dict['AssignmentStatus'] = hit_result['AssignmentStatus']
+            result_dict['AcceptTime'] = str(hit_result['AcceptTime'])
+            result_dict['Answers'] = []
+
+            # Parse Answer into
+            xml_dict = xmltodict.parse(hit_result['Answer'])
+            # There are multiple fields in the HIT layout
+            for field in xml_dict['QuestionFormAnswers']['Answer']:
+                result_dict['Answers'].append(field)
+                if 'marks' in field['QuestionIdentifier']:
+                    marks = field['FreeText']
+                    marks = literal_eval(marks)
+                    organised_marks = OrderedDict()
+                    for i in range(1, len(marks.keys()) + 1):
+                        organised_marks['P%d' % i] = marks['P%d' % i]
+                    df = pd.DataFrame(organised_marks)
+                    df = pd.DataFrame(df.values.T)
+                    df.to_csv("%s.csv" % savename, index=False)
+
+            with open("%s.json" % savename, 'w') as f:
+                f.write(json.dumps(result_dict))
+                #json.dump(f, result_dict)
+
+
+
+            # Dump the result dict 
+
+
 if __name__ == "__main__":
     mturk = AWSMturk()
-    print(mturk.get_balance())
-    ext_question = mturk.create_external_question_XML('https://s3-us-west-2.amazonaws.com/turklandmarker/index.html', 800)
-    print(mturk.create_HIT(ext_question))
+    hits = mturk.list_HITS()
+    mturk.save_results_to_file(hits[2][0])
+    import sys;sys.exit()
+    results = mturk.get_results(hits[2][0])
+    import pdb;pdb.set_trace()
+    import xmltodict
+    results = xmltodict.parse(results['Assignments'][0]['Answer'])
+    import json
+    with open('results.json', 'w') as f:
+        f.write(json.dumps(results))
+    print(mturk.get_results(hits[2][0]))
+#    print(mturk.list_HITS())
+    #print(mturk.get_balance())
+    #ext_question = mturk.create_external_question_XML('https://s3-us-west-2.amazonaws.com/turklandmarker/index.html', 800)
+    #print(mturk.create_HIT(ext_question))

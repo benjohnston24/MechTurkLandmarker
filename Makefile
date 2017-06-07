@@ -34,6 +34,6 @@ test:
 
 clean:
 	cd MechTurkLandmarker &&\
-	rm .coverage
-	rm static/*.jpg
+	rm .coverage &&\
+	rm static/lmrk_*.jpg &&\
 	rm static/check.js

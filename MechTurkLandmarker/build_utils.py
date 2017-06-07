@@ -5,8 +5,8 @@
 """Python build script"""
 
 # Imports
-from utilities import generate_lmrk_images,\
-    generate_config_json,\
+from utilities.generate_lmrk_images import generate_lmrk_images
+from utilities.generate_config_files import generate_config_json,\
     generate_javascript_check
 
 
