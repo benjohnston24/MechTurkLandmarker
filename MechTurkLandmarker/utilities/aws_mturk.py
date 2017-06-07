@@ -29,7 +29,7 @@ EXTERNAL_Q_TEMPLATE = Template(
 </ExternalQuestion>
 """)
 
-class AWSMturk(object):
+class AWSMTurk(object):
 
     def __init__(self, config_file=DEFAULT_SYS_CONFIG, debug_level=1):
         """Constructor"""
@@ -80,7 +80,7 @@ class AWSMturk(object):
 
         return new_hit
 
-    def create_external_question_XML(self, url, frame_height):
+    def create_external_question_XML(self, url):
         """Construct the xml string for an external HIT question
 
         Parameters:
@@ -90,7 +90,10 @@ class AWSMturk(object):
         """
 
         self.external_question = EXTERNAL_Q_TEMPLATE.substitute(
-            url=url, frame_height=frame_height)
+            url=url, frame_height=self.config['AWS-MTURK']['HIT_FRAMEHEIGHT'])
+        
+        if self.debug_level:
+            print(self.external_question)
 
         return self.external_question 
 
@@ -180,18 +183,19 @@ class AWSMturk(object):
 
 
 if __name__ == "__main__":
-    mturk = AWSMturk()
+    mturk = AWSMTurk()
     hits = mturk.list_HITS()
-    mturk.save_results_to_file(hits[2][0])
-    import sys;sys.exit()
-    results = mturk.get_results(hits[2][0])
     import pdb;pdb.set_trace()
-    import xmltodict
-    results = xmltodict.parse(results['Assignments'][0]['Answer'])
-    import json
-    with open('results.json', 'w') as f:
-        f.write(json.dumps(results))
-    print(mturk.get_results(hits[2][0]))
+    #mturk.save_results_to_file('3WRBLBQ2GRQ18817I3SW57AVWZ2G0I')
+    #import sys;sys.exit()
+    #results = mturk.get_results(hits[2][0])
+    #import pdb;pdb.set_trace()
+    #import xmltodict
+    #results = xmltodict.parse(results['Assignments'][0]['Answer'])
+    #import json
+    #with open('results.json', 'w') as f:
+    #    f.write(json.dumps(results))
+    #print(mturk.get_results(hits[2][0]))
 #    print(mturk.list_HITS())
     #print(mturk.get_balance())
     #ext_question = mturk.create_external_question_XML('https://s3-us-west-2.amazonaws.com/turklandmarker/index.html', 800)

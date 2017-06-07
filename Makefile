@@ -1,4 +1,7 @@
-# Patterned after Rust-Empty <https://github.com/bvssvni/rust-empty>, MIT License.
+#!/bin/bash
+# Ben Johnston
+# Wednesday 7 June  15:06:32 AEST 2017
+# License BSD 3-Clause
 # Variables ###################################################################
 SHELL := /bin/bash
 
@@ -29,8 +32,16 @@ build:
 
 test: 
 	cd MechTurkLandmarker &&\
-	MECHTURK_ID=1234 MECHTURK_KEY=456 nosetests -s --with-coverage --cover-package=utilities &&\
-	coverage xml -i
+		MECHTURK_ID=1234 MECHTURK_KEY=456 nosetests -s --with-coverage --cover-package=utilities &&\
+		coverage xml -i
+
+upload:
+	cd MechTurkLandmarker &&\
+		python deploy.py -u -d 1
+
+mturk:
+	cd MechTurkLandmarker &&\
+		python deploy.py -m -d 1
 
 clean:
 	cd MechTurkLandmarker &&\

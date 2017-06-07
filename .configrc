@@ -24,6 +24,10 @@ HighlightColour = #FFFF00
 # MechTurkLandmarker/static
 # StaticFolder = ./static
 
+# Complete path to where assignment results will be stored
+# Uncomment to use otherside default is MechTurkLandmarker/results
+# ResultsFolder = ./results
+
 [AWS-MTURK]
 EndPoint = https://mturk-requester-sandbox.us-east-1.amazonaws.com
 # Uncomment the next line for production use
@@ -31,7 +35,7 @@ EndPoint = https://mturk-requester-sandbox.us-east-1.amazonaws.com
 Region = us-east-1
 
 # HIT Details
-HIT_Title = Facial Landmarking
+HIT_Title = Facial Landmarking3
 HIT_Description = Identify specified points on a face
 HIT_Keywords = facial, landmarking, image, points
 
