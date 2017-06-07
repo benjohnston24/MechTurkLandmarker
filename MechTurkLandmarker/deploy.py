@@ -27,6 +27,8 @@ def get_options(argv=None):
         help='Upload files to S3', required=False)
     parser.add_argument('-m', '--mturk', dest='mturk', action='store_true',
         help='Create mechanical turk task', required=False)
+    parser.add_argument('-r', '--results', dest='results', action='store_true',
+        help='Get and store all available mechanical turk results', required=False)
     parser.add_argument('-c', '--config', type=str, dest='config_file',
         default=DEFAULT_SYS_CONFIG,
         help='Specify configuration file', required=False)
@@ -39,18 +41,30 @@ def _main(args=None):
 
     args = get_options(args)
 
+    # Create objects for later use
     s3 = AWSS3(config_file=args.config_file,
                debug_level=args.debug_level)
+    mturk = AWSMTurk(config_file=args.config_file,
+        debug_level=args.debug_level)
+
+    # Upload files to S3
     if args.upload:
         s3.create_bucket()
         s3.upload_files()
 
+    # Generate mechanical turk HIT
     if args.mturk:
-        mturk = AWSMTurk(config_file=args.config_file,
-            debug_level=args.debug_level)
         ext_question = mturk.create_external_question_XML(
             s3.generate_bucket_link())
         mturk.create_HIT(ext_question)
+
+    # Get and store HIT results in files
+    if args.results:
+        hits = mturk.list_HITS()
+        if args.debug_level:
+            print("Getting HIT results")
+        for hit in hits:
+            mturk.save_results_to_file(hit[0])
 
 if __name__ == "__main__":
     _main()

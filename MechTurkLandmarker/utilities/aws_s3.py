@@ -145,8 +145,3 @@ class AWSS3(object):
                     'ACL': self.config['AWS-S3']['ACL'],
                 },
             ) 
-
-if __name__ == "__main__":
-    s3 = AWSS3() 
-    s3.create_bucket()
-    s3.upload_files()

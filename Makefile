@@ -39,9 +39,13 @@ upload:
 	cd MechTurkLandmarker &&\
 		python deploy.py -u -d 1
 
-mturk:
+create_hit:
 	cd MechTurkLandmarker &&\
 		python deploy.py -m -d 1
+
+hit_results:
+	cd MechTurkLandmarker &&\
+		python deploy.py -r -d 1
 
 clean:
 	cd MechTurkLandmarker &&\

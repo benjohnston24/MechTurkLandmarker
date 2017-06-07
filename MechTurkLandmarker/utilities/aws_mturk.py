@@ -142,9 +142,13 @@ class AWSMTurk(object):
         if not os.path.exists(hit_results_folder):
             os.mkdir(hit_results_folder)
 
+        # Get HIT Information
+        hit_info = self.mturk.get_hit(HITId=hit_id)['HIT']
         hit_results = self.get_results(hit_id, status)
 
-        results = []
+        if self.debug_level:
+            print(hit_info['Title'])
+
         marks = None
         for hit_result in hit_results['Assignments']:
             savename = "{}_{}".format(
@@ -152,51 +156,33 @@ class AWSMTurk(object):
                     hit_result['WorkerId'])
             savename = os.path.join(hit_results_folder, savename)
             result_dict = {}
+            result_dict['Title'] = hit_info['Title']
+            result_dict['Desription'] = hit_info['Description']
+            result_dict['CreationTime'] = str(hit_info['CreationTime'])
             result_dict['WorkerId'] = hit_result['WorkerId']
             result_dict['AssignmentId'] = hit_result['AssignmentId']
             result_dict['AssignmentStatus'] = hit_result['AssignmentStatus']
             result_dict['AcceptTime'] = str(hit_result['AcceptTime'])
             result_dict['Answers'] = []
 
+            if self.debug_level:
+                print("Assignment ID: %s" % result_dict['AssignmentId'])
+
             # Parse Answer into
             xml_dict = xmltodict.parse(hit_result['Answer'])
             # There are multiple fields in the HIT layout
             for field in xml_dict['QuestionFormAnswers']['Answer']:
                 result_dict['Answers'].append(field)
-                if 'marks' in field['QuestionIdentifier']:
-                    marks = field['FreeText']
-                    marks = literal_eval(marks)
-                    organised_marks = OrderedDict()
-                    for i in range(1, len(marks.keys()) + 1):
-                        organised_marks['P%d' % i] = marks['P%d' % i]
-                    df = pd.DataFrame(organised_marks)
-                    df = pd.DataFrame(df.values.T)
-                    df.to_csv("%s.csv" % savename, index=False)
+                if hasattr(field, 'keys'):
+                    if 'marks' in field['QuestionIdentifier']:
+                        marks = field['FreeText']
+                        marks = literal_eval(marks)
+                        organised_marks = OrderedDict()
+                        for i in range(1, len(marks.keys()) + 1):
+                            organised_marks['P%d' % i] = marks['P%d' % i]
+                        df = pd.DataFrame(organised_marks)
+                        df = pd.DataFrame(df.values.T)
+                        df.to_csv("%s.csv" % savename, index=False)
 
             with open("%s.json" % savename, 'w') as f:
                 f.write(json.dumps(result_dict))
-                #json.dump(f, result_dict)
-
-
-
-            # Dump the result dict 
-
-
-if __name__ == "__main__":
-    mturk = AWSMTurk()
-    hits = mturk.list_HITS()
-    import pdb;pdb.set_trace()
-    #mturk.save_results_to_file('3WRBLBQ2GRQ18817I3SW57AVWZ2G0I')
-    #import sys;sys.exit()
-    #results = mturk.get_results(hits[2][0])
-    #import pdb;pdb.set_trace()
-    #import xmltodict
-    #results = xmltodict.parse(results['Assignments'][0]['Answer'])
-    #import json
-    #with open('results.json', 'w') as f:
-    #    f.write(json.dumps(results))
-    #print(mturk.get_results(hits[2][0]))
-#    print(mturk.list_HITS())
-    #print(mturk.get_balance())
-    #ext_question = mturk.create_external_question_XML('https://s3-us-west-2.amazonaws.com/turklandmarker/index.html', 800)
-    #print(mturk.create_HIT(ext_question))
