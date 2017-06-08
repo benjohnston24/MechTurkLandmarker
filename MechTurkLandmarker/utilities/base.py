@@ -74,7 +74,7 @@ def parse_sys_config(config_file=DEFAULT_SYS_CONFIG, defaults=True):
         },
         'LANDMARK-DETAILS':
         {
-            'RADIUS': config['LANDMARK-DETAILS']['Radius'],
+            'RADIUS': int(config['LANDMARK-DETAILS']['Radius']),
             'BASE_COLOUR': config['LANDMARK-DETAILS']['BaseColour'],
             'HI_COLOUR': config['LANDMARK-DETAILS']['HighlightColour'],
         },
@@ -102,6 +102,13 @@ def parse_sys_config(config_file=DEFAULT_SYS_CONFIG, defaults=True):
         else:
             data['LANDMARK-DETAILS']['STATIC_FOLDER'] =\
                 config['LANDMARK-DETAILS']['StaticFolder']
+
+        if 'DisplayImage' not in config['LANDMARK-DETAILS']:
+            data['LANDMARK-DETAILS']['DISPLAY_FACE'] =\
+                os.path.join(DEFAULT_SAVE_FOLDER, "display_image.jpg")
+        else:
+            data['LANDMARK-DETAILS']['DISPLAY_FACE'] =\
+                config['LANDMARK-DETAILS']['DisplayImage']
 
         if 'ResultsFolder' not in config['LANDMARK-DETAILS']:
             data['LANDMARK-DETAILS']['RESULTS_FOLDER'] =\

@@ -27,7 +27,7 @@ help:
 all: build
 
 build:
-	cd MechTurkLandmarker && python build_utils.py &&\
+	cd MechTurkLandmarker && python utils.py -b &&\
 		python -m markdown -o html protocol.md > protocol.html
 
 test: 
@@ -37,15 +37,15 @@ test:
 
 upload:
 	cd MechTurkLandmarker &&\
-		python deploy.py -u -d 1
+		python utils.py -u -v 1
 
 create_hit:
 	cd MechTurkLandmarker &&\
-		python deploy.py -m -d 1
+		python utils.py -m -v 1
 
 hit_results:
 	cd MechTurkLandmarker &&\
-		python deploy.py -r -d 1
+		python utils.py -r -v 1
 
 clean:
 	cd MechTurkLandmarker &&\

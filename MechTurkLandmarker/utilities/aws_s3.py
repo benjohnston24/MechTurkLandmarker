@@ -7,8 +7,6 @@
 # Imports
 import boto3
 import os
-from utilities.base import parse_sys_config, UTIL_FOLDER,\
-    DEFAULT_SYS_CONFIG
 
 __author__ = 'Ben Johnston'
 __revision__ = '0.1'
@@ -33,11 +31,11 @@ CONTENT_TYPES = {
 
 class AWSS3(object):
 
-    def __init__(self, config_file=DEFAULT_SYS_CONFIG, debug_level=1):
+    def __init__(self, config, debug_level=1):
         """Constructor"""
 
         self.debug_level = debug_level
-        self.config = parse_sys_config(config_file)
+        self.config = config 
         self.index_file = 'index.html'
         self.protocol_file = 'protocol.html'
         self.error_file = 'error.html'

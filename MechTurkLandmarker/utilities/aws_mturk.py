@@ -14,8 +14,7 @@ from collections import OrderedDict
 from ast import literal_eval
 from string import Template
 from datetime import datetime
-from utilities.base import parse_sys_config, UTIL_FOLDER,\
-    DEFAULT_SYS_CONFIG
+from utilities.generate_lmrk_images import generate_lmrk_images
 
 __author__ = 'Ben Johnston'
 __revision__ = '0.1'
@@ -31,11 +30,11 @@ EXTERNAL_Q_TEMPLATE = Template(
 
 class AWSMTurk(object):
 
-    def __init__(self, config_file=DEFAULT_SYS_CONFIG, debug_level=1):
+    def __init__(self, config, debug_level=1):
         """Constructor"""
 
         self.debug_level = debug_level
-        self.config = parse_sys_config(config_file)
+        self.config = config 
         self.connected = False
 
     def connect(self):
@@ -115,7 +114,7 @@ class AWSMTurk(object):
             )
         return hit_summary
 
-    def get_results(self, hit_id, 
+    def get_results(self, hit_id, max_results=100,
         status=['Submitted', 'Approved', 'Rejected']):
         """Get the results for a particular HIT""" 
 
@@ -124,11 +123,14 @@ class AWSMTurk(object):
 
         results = self.mturk.list_assignments_for_hit(
             HITId=hit_id,
+            MaxResults=max_results,
             AssignmentStatuses=status)
 
         return results
 
     def save_results_to_file(self, hit_id,
+        #TODO Look into pagination, 100 is max results that can be returned at a time
+        max_results=100, 
         status=['Submitted', 'Approved', 'Rejected']):
         """Save the results to a file"""
 
@@ -144,17 +146,14 @@ class AWSMTurk(object):
 
         # Get HIT Information
         hit_info = self.mturk.get_hit(HITId=hit_id)['HIT']
-        hit_results = self.get_results(hit_id, status)
+        hit_results = self.get_results(hit_id, max_results, status)
 
         if self.debug_level:
             print(hit_info['Title'])
+            print("%d results" % hit_results['NumResults'])
 
         marks = None
         for hit_result in hit_results['Assignments']:
-            savename = "{}_{}".format(
-                    datetime.now().strftime("%Y-%m-%d-%H:%M:%S"),
-                    hit_result['WorkerId'])
-            savename = os.path.join(hit_results_folder, savename)
             result_dict = {}
             result_dict['Title'] = hit_info['Title']
             result_dict['Desription'] = hit_info['Description']
@@ -164,6 +163,14 @@ class AWSMTurk(object):
             result_dict['AssignmentStatus'] = hit_result['AssignmentStatus']
             result_dict['AcceptTime'] = str(hit_result['AcceptTime'])
             result_dict['Answers'] = []
+            savename = "{}_{}".format(
+                    datetime.now().strftime("%Y-%m-%d-%H:%M:%S"),
+                    hit_result['WorkerId'])
+            save_folder = os.path.join(hit_results_folder,result_dict['AssignmentId'])
+
+            if not os.path.exists(save_folder):
+                os.mkdir(save_folder)
+            savename = os.path.join(save_folder, savename)
 
             if self.debug_level:
                 print("Assignment ID: %s" % result_dict['AssignmentId'])
@@ -186,3 +193,12 @@ class AWSMTurk(object):
 
             with open("%s.json" % savename, 'w') as f:
                 f.write(json.dumps(result_dict))
+
+            # Generate images of the answers in the save folder
+            generate_lmrk_images(
+                    image_file=self.config['LANDMARK-DETAILS']['DISPLAY_FACE'],
+                    landmarks_file="%s.csv" % savename,
+                    base_colour=self.config['LANDMARK-DETAILS']['BASE_COLOUR'],
+                    hi_colour=self.config['LANDMARK-DETAILS']['HI_COLOUR'],
+                    save_folder=save_folder,
+                    radius=self.config['LANDMARK-DETAILS']['RADIUS'])
