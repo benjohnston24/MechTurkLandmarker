@@ -28,7 +28,7 @@ all: build
 
 build:
 	cd MechTurkLandmarker && python build_utils.py &&\
-		python -m markdown -o html protocol.markdown > protocol.html
+		python -m markdown -o html protocol.md > protocol.html
 
 test: 
 	cd MechTurkLandmarker &&\

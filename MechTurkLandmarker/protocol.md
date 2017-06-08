@@ -14,7 +14,7 @@ img {
 # MechanicalTurk Facial Landmarking Task
 ## Introduction
 
-During this task you will be marking 66 points on an image of a face using the provided web based interface.  To start
+During this task you will be marking 65 points on an image of a face using the provided web based interface.  To start
 the process you simply need to click on the button for the first point P1, then using the mouse select the corresponding
 point on the photograph of the face.
 
@@ -32,7 +32,7 @@ below.  You must correct these warnings before you can submit the task.
 
 ![example warning](static/example_warning.png)
 
-Once you have marked **ALL** 66 points you will have completed the task and a submit button will be available.
+Once you have marked **ALL** 65 points you will have completed the task and a submit button will be available.
 
 ![submit task](static/submit_task_btn.png)
 
@@ -42,9 +42,17 @@ only one HIT will be approved.
 
 ## Consent
 This information will be used for academic research, by accepting this HIT you are giving permission for the
-information you have provided during this exercise to be used for this purpose.
+answers you have provided during this exercise to be used for this purpose.  The answers provided during this HIT will
+not be associated with your username, proper name or contact details.  The answers will be stored with your Mechanical
+Turk WorkerId.  By accepting this hit you are providing permission to store your Mechanical Turk WorkderId with your
+answer
 
 ## Contact Information
 If you have any further questions you can contact us directly through the Mechanical Turk *Contact Requester* link
+associated with the HIT.
+
+
+
+
 
 </div>

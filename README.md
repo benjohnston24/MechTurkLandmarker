@@ -1,31 +1,33 @@
-# eol-mturk-landmark
+# MechTurkLandmarker  [![travisCI](https://travis-ci.org/benjohnston24/MechTurkLandmarker.svg?branch=master)](https://travis-ci.org/benjohnston24/MechTurkLandmarker)  [![codecov](https://codecov.io/gh/benjohnston24/MechTurkLandmarker/branch/master/graph/badge.svg)](https://codecov.io/gh/benjohnston24/MechTurkLandmarker)
+## Manual Image Landmarking in Amazon Mechanical Turk
 
-A web-based image landmarking tool intended for use with Amazon Mechanical Turk. Currently this is not very general and will actually only work for one specific set of images, but it would not be too difficult to adapt it to your own uses.
+MechTurkLandmarker is a web-based image landmarking tool intended for use with Amazon Mechanical Turk.  With MechTurkLandmarker you can easily submit tasks to Amazon Mechanical Turk, allowing for many people to manually identify landmarks of interest on an image. This automatically 'package' generates all of the
+required files and automates the build and deployment process through through pre-configured Python scripts.  The default setup provides all of the
+files required in order to create a Mechanical Turk HIT to landmark an example face with the [MULTI-PIE landmark
+configuration](http://www.flintbox.com/public/project/4742/).  An example of a deployed HIT to Amazon S3 can be found
+[here](https://s3-us-west-2.amazonaws.com/turklandmarker/index.html)
 
-## Organization
+# Installation
 
-* app.html - entry point into the application.
-* js/ - JavaScript files. Includes Bootstrap, jQuery, the JSON library, and the Amazon mTurk library.
-    * js/base.js - all custom JavaScript functionality.
-* css/ - CSS sheets, including Bootstrap.
-    * css/base.css - all custom CSS style information.
-* img/ - images for context-sensitive help. If these change then helpimgs.js needs to be updated as well.
-* protocol/ - files that generate the full help file that contains instructions for landmarkers
+Currently the source has not been organised into a single Python package for download from pypi, this may occur in the
+future with continued development, if there is sufficient demand.  For now, simply clone the entire source directory and
+install all the requirements.  It is always recommended to use a virtualenv when installing all requirements.
+
+```
+git clone git@github.com:benjohnston24/MechTurkLandmarker.git
+cd MechTurkLandmarker
+pip install -r requirements.txt
+```
+
+## Configuration Files
+
+* [.configrc](https://github.com/benjohnston24/MechTurkLandmarker/blob/master/.configrc) - configuration file for the
+  system, modify this file to change aspects of operation and details of the Mechanical Turk HIT tasks or S3 Buckets. 
 
 ## Building
 
-You can deploy these files to Amazon as-is, though you will need to use the [Amazon Mechanical Turk Command Line Tools](http://aws.amazon.com/developertools/694), or the [API](http://aws.amazon.com/documentation/mturk/), to format these HITs as an [ExternalQuestion](http://docs.aws.amazon.com/AWSMechTurk/latest/AWSMturkAPI/ApiReference_ExternalQuestionArticle.html). They are too large (>128kb or so) to be inlined on the mTurk site.
-
-For extra speed, you can compress and inline the app file. This requires [node.js](http://nodejs.org/), [inliner](https://github.com/remy/inliner) (via [npm](https://npmjs.org/)), and all its dependencies. Then, execute `compress.sh`, or run `inliner -vi app.html > app_small.html` in your Terminal.
-
-To build the help instructions, you'll need [pandoc](http://johnmacfarlane.net/pandoc/). Navigate to the `protocol/` directory and execute either `build.sh` or `build.ps1`, depending on your operating system. This will create a HTML and PDF file of the landmarking protocol.
-
 ## TODO
 
-* Better review interface
-* Rip out dependencies on jQuery and bootstrap
-* Streamline HIT posting
-
-## Acknowledgements
-
-This research is supported by an [Encyclopedia of Life Rubenstein Fellowship](http://eol.org/info/fellows) to Jonathan Chang.
+* Improve test coverage - Python
+* Add javascript unit tests
+* Add multi-image HITS 
