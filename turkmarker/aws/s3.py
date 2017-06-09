@@ -11,7 +11,7 @@ import os
 __author__ = 'Ben Johnston'
 __revision__ = '0.1'
 __date__ = 'Monday 5 June  21:04:56 AEST 2017'
-__license__ = 'MPL v2.0'
+__license__ = 'BSD 3-Clause'
 
 
 CONTENT_TYPES = {
@@ -143,3 +143,4 @@ class AWSS3(object):
                     'ACL': self.config['AWS-S3']['ACL'],
                 },
             ) 
+

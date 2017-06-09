@@ -14,12 +14,12 @@ from collections import OrderedDict
 from ast import literal_eval
 from string import Template
 from datetime import datetime
-from utilities.generate_lmrk_images import generate_lmrk_images
+from turkmarker.utilities.generate import GenerateSite 
 
 __author__ = 'Ben Johnston'
 __revision__ = '0.1'
 __date__ = 'Tuesday 6 June  16:29:28 AEST 2017'
-__license__ = 'MPL v2.0'
+__license__ = 'BSD 3-Clause'
 
 EXTERNAL_Q_TEMPLATE = Template(
 """<ExternalQuestion xmlns="http://mechanicalturk.amazonaws.com/AWSMechanicalTurkDataSchemas/2006-07-14/ExternalQuestion.xsd">
@@ -202,3 +202,4 @@ class AWSMTurk(object):
                     hi_colour=self.config['LANDMARK-DETAILS']['HI_COLOUR'],
                     save_folder=save_folder,
                     radius=self.config['LANDMARK-DETAILS']['RADIUS'])
+

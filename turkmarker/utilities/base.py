@@ -134,3 +134,4 @@ def parse_sys_config(config_file=DEFAULT_SYS_CONFIG, defaults=True):
                 config['LANDMARK-DETAILS']['CheckJS']
 
     return data
+

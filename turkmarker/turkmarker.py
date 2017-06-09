@@ -5,18 +5,21 @@
 """Python script to deploy site to AWS S3 and Mechanical Turk"""
 
 # Imports
+import sys; import pprint
+pprint.pprint(sys.path)
 import argparse
+import pdb;pdb.set_trace()
+from utilities.base import parse_sys_config,\
+    UTIL_FOLDER, DEFAULT_SYS_CONFIG, DEFAULT_SAVE_FOLDER
 from utilities.base import parse_sys_config, DEFAULT_SYS_CONFIG
-from utilities.generate_lmrk_images import generate_lmrk_images
-from utilities.generate_config_files import generate_config_json,\
-    generate_javascript_check
-from utilities.aws_s3 import AWSS3 
-from utilities.aws_mturk import AWSMTurk
+from utilities.generate import GenerateSite
+from aws.s3 import AWSS3 
+from aws.mturk import AWSMTurk
 
 __author__ = 'Ben Johnston'
 __revision__ = '0.1'
 __date__ = 'Wednesday 7 June  13:52:10 AEST 2017'
-__license__ = 'MPL v2.0'
+__license__ = 'BSD 3-Clause'
 
 
 def get_options(argv=None):
@@ -59,15 +62,16 @@ def _main(args=None):
 
     # Build the site
     if args.build:
-        generate_lmrk_images(
+        site = GenerateSite(config)
+        site.generate_lmrk_images(
             image_file=config['LANDMARK-DETAILS']['TEMPLATE_FACE'],
             landmarks_file=config['LANDMARK-DETAILS']['TEMPLATE_LANDMARKS'],
             base_colour=config['LANDMARK-DETAILS']['BASE_COLOUR'],
             hi_colour=config['LANDMARK-DETAILS']['HI_COLOUR'],
             save_folder=config['LANDMARK-DETAILS']['STATIC_FOLDER'],
             radius=config['LANDMARK-DETAILS']['RADIUS'])
-        generate_config_json(args.config_file)
-        generate_javascript_check(args.config_file)
+        site.generate_config_json()
+        site.generate_javascript_check()
 
     # Upload files to S3
     if args.upload:
@@ -94,3 +98,4 @@ def _main(args=None):
 
 if __name__ == "__main__":
     _main()
+

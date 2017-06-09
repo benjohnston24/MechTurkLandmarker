@@ -27,28 +27,27 @@ help:
 all: build
 
 build:
-	cd MechTurkLandmarker && python utils.py -b &&\
-		python -m markdown -o html protocol.md > protocol.html
+	cd turkmarker && python turkmarker.py -b
+#		python -m markdown -o html protocol.md > protocol.html
 
 test: 
-	cd MechTurkLandmarker &&\
-		MECHTURK_ID=1234 MECHTURK_KEY=456 nosetests -s --with-coverage --cover-package=utilities &&\
+	MECHTURK_ID=1234 MECHTURK_KEY=456 nosetests --with-coverage --cover-package=turkmarker &&\
 		coverage xml -i
 
 upload:
-	cd MechTurkLandmarker &&\
-		python utils.py -u -v 1
+	cd turkmarker &&\
+		python turkmarker.py -u -v 1
 
 create_hit:
-	cd MechTurkLandmarker &&\
-		python utils.py -m -v 1
+	cd turkmarker &&\
+		python turkmarker.py -m -v 1
 
 hit_results:
-	cd MechTurkLandmarker &&\
-		python utils.py -r -v 1
+	cd turkmarker &&\
+		python turkmarker.py -r -v 1
 
 clean:
-	cd MechTurkLandmarker &&\
+	cd turkmarker &&\
 	rm .coverage &&\
 	rm static/lmrk_*.jpg &&\
 	rm static/check.js
