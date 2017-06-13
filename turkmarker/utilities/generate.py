@@ -12,7 +12,7 @@ import numpy as np
 from PIL import Image, ImageDraw, ImageFont
 from string import Template
 from collections import OrderedDict
-from .base import UTIL_FOLDER
+from .base import DATA_FOLDER
 
 __author__ = 'Ben Johnston'
 __revision__ = '0.1'
@@ -38,7 +38,7 @@ TEMPLATES = {
 }
 JS_END = "    return acc;\n}"
 
-FONT_FILE = os.path.join(UTIL_FOLDER, 'DejaVuSans.ttf')
+FONT_FILE = os.path.join(DATA_FOLDER, 'DejaVuSans.ttf')
 SANS16 = ImageFont.truetype(FONT_FILE, 25)
 
 

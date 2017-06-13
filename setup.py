@@ -19,5 +19,9 @@ setup(
     author_email='',
     version=ver,
     packages=find_packages(),
+    package_data = {
+        'turkmarker': ['data/*',
+                       'data/static/*'],
+    },
     license=open('LICENSE.md').read(),
     long_description=open('README.md').read())

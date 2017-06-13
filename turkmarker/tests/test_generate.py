@@ -13,7 +13,7 @@ import numpy as np
 from collections import OrderedDict
 from unittest.mock import MagicMock, patch
 from turkmarker.utilities.base import parse_sys_config,\
-    UTIL_FOLDER, DEFAULT_SYS_CONFIG, DEFAULT_SAVE_FOLDER
+    DATA_FOLDER, DEFAULT_SYS_CONFIG, DEFAULT_SAVE_FOLDER
 from turkmarker.utilities.generate import GenerateSite,\
     CHECK_JS_INTRO, X_TEMPLATE, Y_TEMPLATE, JS_END
 
@@ -69,8 +69,8 @@ class TestGenerateFiles(unittest.TestCase):
 
         config = {
             'LANDMARK-DETAILS': {
-                'TEMPLATE_FACE': os.path.join(UTIL_FOLDER, 'template_face.png'), 
-                'TEMPLATE_LANDMARKS': os.path.join(UTIL_FOLDER, 'template_landmarks.csv'), 
+                'TEMPLATE_FACE': os.path.join(DATA_FOLDER, 'template_face.png'), 
+                'TEMPLATE_LANDMARKS': os.path.join(DATA_FOLDER, 'template_landmarks.csv'), 
                 'STATIC_FOLDER': DEFAULT_SAVE_FOLDER,
                 'RADIUS': 3, 
                 'BASE_COLOUR': '#FFFFFF', 
@@ -92,7 +92,7 @@ class TestGenerateFiles(unittest.TestCase):
 
         config = {
             'LANDMARK-DETAILS': {
-                'TEMPLATE_LANDMARKS': os.path.join(UTIL_FOLDER, 'template_landmarks.csv'), 
+                'TEMPLATE_LANDMARKS': os.path.join(DATA_FOLDER, 'template_landmarks.csv'), 
                 'CONFIG_JSON': os.path.join(DEFAULT_SAVE_FOLDER, 'config.json'),
                 }
             }
@@ -119,7 +119,7 @@ class TestGenerateFiles(unittest.TestCase):
 
         config = {
             'LANDMARK-DETAILS': {
-                'TEMPLATE_LANDMARKS': os.path.join(UTIL_FOLDER, 'template_landmarks.csv'), 
+                'TEMPLATE_LANDMARKS': os.path.join(DATA_FOLDER, 'template_landmarks.csv'), 
                 'CHECK_JS': os.path.join(DEFAULT_SAVE_FOLDER, 'check.js'),
                 }
             }

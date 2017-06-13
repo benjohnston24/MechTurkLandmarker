@@ -7,6 +7,7 @@
 # Imports
 import configparser
 import os
+import pkg_resources
 
 __author__ = 'Ben Johnston'
 __revision__ = '0.1'
@@ -15,10 +16,10 @@ __license__ = 'MPL v2.0'
 
 
 # Default variables
-UTIL_FOLDER = os.path.dirname(os.path.abspath(__file__))
-DEFAULT_LMRKS_FILE = os.path.join(UTIL_FOLDER, "template_landmarks.csv")
-DEFAULT_SAVE_FOLDER = os.path.join(os.path.dirname(UTIL_FOLDER), 'static')
-DEFAULT_RESULTS_FOLDER = os.path.join(os.path.dirname(UTIL_FOLDER), 'results')
+DATA_FOLDER = pkg_resources.resource_filename('turkmarker', 'data/') 
+DEFAULT_LMRKS_FILE = os.path.join(DATA_FOLDER, "template_landmarks.csv")
+DEFAULT_SAVE_FOLDER = os.path.join(os.path.dirname(DATA_FOLDER), 'static')
+DEFAULT_RESULTS_FOLDER = os.path.join(os.path.dirname(DATA_FOLDER), 'results')
 DEFAULT_SYS_CONFIG = os.path.join(
     os.path.dirname(
     os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
@@ -84,14 +85,14 @@ def parse_sys_config(config_file=DEFAULT_SYS_CONFIG, defaults=True):
     if defaults:
         if 'TemplateImage' not in config['LANDMARK-DETAILS']:
             data['LANDMARK-DETAILS']['TEMPLATE_FACE'] =\
-                os.path.join(UTIL_FOLDER, "template_face.png")
+                os.path.join(DATA_FOLDER, "template_face.png")
         else:
             data['LANDMARK-DETAILS']['TEMPLATE_FACE'] =\
                 config['LANDMARK-DETAILS']['TemplateImage']
 
         if 'TemplateLandmarks' not in config['LANDMARK-DETAILS']:
             data['LANDMARK-DETAILS']['TEMPLATE_LANDMARKS'] =\
-                os.path.join(UTIL_FOLDER, "template_landmarks.csv")
+                os.path.join(DATA_FOLDER, "template_landmarks.csv")
         else:
             data['LANDMARK-DETAILS']['TEMPLATE_LANDMARKS'] =\
                 config['LANDMARK-DETAILS']['TemplateLandmarks']
