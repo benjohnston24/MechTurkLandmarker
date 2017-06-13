@@ -8,10 +8,10 @@
 import os
 import unittest
 from unittest import skip
-from unittest.mock import Mock, mock_open
+from unittest.mock import patch, mock_open, Mock
+import configparser
 import numpy as np
 from collections import OrderedDict
-from unittest.mock import MagicMock, patch
 from turkmarker.utilities.base import parse_sys_config,\
     DATA_FOLDER, DEFAULT_SYS_CONFIG, DEFAULT_SAVE_FOLDER
 from turkmarker.utilities.generate import GenerateSite,\
@@ -30,6 +30,48 @@ js_landmarks = np.array(
     [402, 603],
     [302, 603],
 ])
+
+class MockConfigParser(configparser.ConfigParser):
+
+    def __init__(self, *args, **kwargs):
+        self._data = {
+            'AWS-S3': {
+                'BucketName': 'bucket',
+                'Region': 'us-west-1',
+                'ACL': 'public-read',
+                },
+            'AWS-MTURK' : {
+                'EndPoint': 'http://www.mturk.com',
+                'Region': 'us-west-1',
+                'HIT_Title': 'title',
+                'HIT_Description': 'desc',
+                'HIT_Keywords': 'keywords',
+                'HIT_Reward': '0.15',
+                'HIT_Max_Assignments': '10',
+                'HIT_LifetimeInSeconds': '20',
+                'HIT_AssignmentDurationInSeconds': '2',
+                'HIT_AutoApprovalDelayInSeconds': '1',
+                'HIT_Frame_Height': '100',
+                },
+            'LANDMARK-DETAILS': {
+                'Radius': '10',
+                'BaseColour': '#ffffff',
+                'HighlightColour': '#000000',
+                'TemplateImage': 'template_face.png',
+                'TemplateLandmarks': 'landmarks.csv',
+                'StaticFolder': 'static_folder',
+                'DisplayImage': 'display_image.png',
+                'ResultsFolder': 'results_folder',
+                'ConfigJSON': 'config_json.json',
+                'CheckJS': 'check_js.js',
+                }
+        } 
+
+    def read(self, *args, **kwargs):
+        pass
+
+    def __getitem__(self, key):
+        return self._data[key]
 
 
 class TestGenerateFiles(unittest.TestCase):
@@ -63,13 +105,43 @@ class TestGenerateFiles(unittest.TestCase):
         self.assertEqual(config['KEYS']['AWS-ID'], '1234')
         self.assertEqual(config['KEYS']['AWS-KEY'], '456')
 
+    def test_default_override(self):
+        """Test parse_sys_config returns non-default values"""
+
+        with patch('configparser.ConfigParser', MockConfigParser) as m:
+            config_no_defaults = parse_sys_config()
+
+            # Check the no defaults
+            self.assertEqual(config_no_defaults['LANDMARK-DETAILS']['TEMPLATE_IMAGE'],
+                             m()['LANDMARK-DETAILS']['TemplateImage'])
+            self.assertEqual(config_no_defaults['LANDMARK-DETAILS']['TEMPLATE_LANDMARKS'],
+                             m()['LANDMARK-DETAILS']['TemplateLandmarks'])
+            self.assertEqual(config_no_defaults['LANDMARK-DETAILS']['STATIC_FOLDER'],
+                             m()['LANDMARK-DETAILS']['StaticFolder'])
+            self.assertEqual(config_no_defaults['LANDMARK-DETAILS']['DISPLAY_IMAGE'],
+                             m()['LANDMARK-DETAILS']['DisplayImage'])
+            self.assertEqual(config_no_defaults['LANDMARK-DETAILS']['RESULTS_FOLDER'],
+                             m()['LANDMARK-DETAILS']['ResultsFolder'])
+            self.assertEqual(config_no_defaults['LANDMARK-DETAILS']['CONFIG_JSON'],
+                             m()['LANDMARK-DETAILS']['ConfigJSON'])
+            self.assertEqual(config_no_defaults['LANDMARK-DETAILS']['CHECK_JS'],
+                             m()['LANDMARK-DETAILS']['CheckJS'])
+
+
+    def test_no_config(self):
+        """Test assertion raises when config file doesn't exist"""
+
+        with self.assertRaises(FileNotFoundError):
+            config = parse_sys_config('no_config')
+        
+
     @patch('numpy.genfromtxt', return_value=np.array([[1,2],[3,4]]))
     @patch('PIL.Image.Image.save')
     def test_correct_num_images_produces(self, mock_img, mock_pts):
 
         config = {
             'LANDMARK-DETAILS': {
-                'TEMPLATE_FACE': os.path.join(DATA_FOLDER, 'template_face.png'), 
+                'TEMPLATE_IMAGE': os.path.join(DATA_FOLDER, 'template_face.png'), 
                 'TEMPLATE_LANDMARKS': os.path.join(DATA_FOLDER, 'template_landmarks.csv'), 
                 'STATIC_FOLDER': DEFAULT_SAVE_FOLDER,
                 'RADIUS': 3, 
@@ -96,7 +168,6 @@ class TestGenerateFiles(unittest.TestCase):
                 'CONFIG_JSON': os.path.join(DEFAULT_SAVE_FOLDER, 'config.json'),
                 }
             }
-
 
         GenerateSite(config).generate_config_json()
 

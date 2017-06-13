@@ -32,7 +32,7 @@ build:
 
 test: 
 	cd turkmarker &&\
-		MECHTURK_ID=1234 MECHTURK_KEY=456 nosetests --with-coverage --cover-package=turkmarker &&\
+		MECHTURK_ID=1234 MECHTURK_KEY=456 nosetests -s --pdb --with-coverage --cover-html --cover-package=turkmarker &&\
 		coverage xml -i
 
 upload:

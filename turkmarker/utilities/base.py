@@ -18,13 +18,13 @@ __license__ = 'MPL v2.0'
 # Default variables
 DATA_FOLDER = pkg_resources.resource_filename('turkmarker', 'data/') 
 DEFAULT_LMRKS_FILE = os.path.join(DATA_FOLDER, "template_landmarks.csv")
-DEFAULT_SAVE_FOLDER = os.path.join(os.path.dirname(DATA_FOLDER), 'static')
+# Need to change this when creating turkmarker-admin
+DEFAULT_SAVE_FOLDER = os.path.join(DATA_FOLDER, 'static')
+# Need to move this
 DEFAULT_RESULTS_FOLDER = os.path.join(os.path.dirname(DATA_FOLDER), 'results')
-DEFAULT_SYS_CONFIG = os.path.join(
-    os.path.dirname(
-    os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
-DEFAULT_SYS_CONFIG = os.path.join(DEFAULT_SYS_CONFIG, '.configrc')
+DEFAULT_SYS_CONFIG = os.path.join(DATA_FOLDER, '.configrc')
 
+# Consider adding to default config file
 AWS_ACCESS_KEY_ID = os.getenv('MECHTURK_ID') 
 AWS_SECRET_ACCESS_KEY = os.getenv('MECHTURK_KEY') 
 
@@ -41,12 +41,13 @@ def parse_sys_config(config_file=DEFAULT_SYS_CONFIG, defaults=True):
     """
 
     if not os.path.exists(config_file):
-        raise ValueError("Config file does not exist")
+        raise FileNotFoundError("Config file does not exist")
 
     config = configparser.ConfigParser()
     config.read(config_file)
 
     # Extract the info
+    # Mandatory lines in configuration file
     data =  {
         'AWS-S3': 
         {
@@ -81,13 +82,13 @@ def parse_sys_config(config_file=DEFAULT_SYS_CONFIG, defaults=True):
         },
     }
 
-    # Apply default parameters if not listed in config file
+    # Optional items in configuration file
     if defaults:
         if 'TemplateImage' not in config['LANDMARK-DETAILS']:
-            data['LANDMARK-DETAILS']['TEMPLATE_FACE'] =\
+            data['LANDMARK-DETAILS']['TEMPLATE_IMAGE'] =\
                 os.path.join(DATA_FOLDER, "template_face.png")
         else:
-            data['LANDMARK-DETAILS']['TEMPLATE_FACE'] =\
+            data['LANDMARK-DETAILS']['TEMPLATE_IMAGE'] =\
                 config['LANDMARK-DETAILS']['TemplateImage']
 
         if 'TemplateLandmarks' not in config['LANDMARK-DETAILS']:
@@ -105,10 +106,10 @@ def parse_sys_config(config_file=DEFAULT_SYS_CONFIG, defaults=True):
                 config['LANDMARK-DETAILS']['StaticFolder']
 
         if 'DisplayImage' not in config['LANDMARK-DETAILS']:
-            data['LANDMARK-DETAILS']['DISPLAY_FACE'] =\
+            data['LANDMARK-DETAILS']['DISPLAY_IMAGE'] =\
                 os.path.join(DEFAULT_SAVE_FOLDER, "display_image.jpg")
         else:
-            data['LANDMARK-DETAILS']['DISPLAY_FACE'] =\
+            data['LANDMARK-DETAILS']['DISPLAY_IMAGE'] =\
                 config['LANDMARK-DETAILS']['DisplayImage']
 
         if 'ResultsFolder' not in config['LANDMARK-DETAILS']:

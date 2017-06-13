@@ -133,7 +133,7 @@ class GenerateSite(object):
         """
 
         if image_file is None:
-            image_file = self.config['LANDMARK-DETAILS']['TEMPLATE_FACE']
+            image_file = self.config['LANDMARK-DETAILS']['TEMPLATE_IMAGE']
         if landmarks_file is None:
             landmarks_file = self.config['LANDMARK-DETAILS']['TEMPLATE_LANDMARKS']
         if base_colour is None:

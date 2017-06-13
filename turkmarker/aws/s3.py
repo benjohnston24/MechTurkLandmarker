@@ -65,14 +65,14 @@ class AWSS3(object):
 
     def generate_bucket_link(self):
 
-        msg = "https://s3-%s.amazonaws.com/%s/%s" % (
+        link = "https://s3-%s.amazonaws.com/%s/%s" % (
             self.config['AWS-S3']['REGION'],
             self.config['AWS-S3']['BUCKET_NAME'],
             self.index_file)
         if self.debug_level:
-            print(msg)
+            print(link)
 
-        return msg
+        return link 
 
     def create_bucket(self):
         """Create the bucket on AWS S3"""
