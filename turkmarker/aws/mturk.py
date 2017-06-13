@@ -9,7 +9,6 @@ import boto3
 import os
 import xmltodict
 import json
-import pandas as pd
 from collections import OrderedDict
 from ast import literal_eval
 from string import Template
@@ -187,8 +186,7 @@ class AWSMTurk(object):
                         organised_marks = OrderedDict()
                         for i in range(1, len(marks.keys()) + 1):
                             organised_marks['P%d' % i] = marks['P%d' % i]
-                        df = pd.DataFrame(organised_marks)
-                        df = pd.DataFrame(df.values.T)
+                        df = np.array(organised_marks).T
                         df.to_csv("%s.csv" % savename, index=False)
 
             with open("%s.json" % savename, 'w') as f:

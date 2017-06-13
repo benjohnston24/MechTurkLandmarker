@@ -1,2 +1,2 @@
-from . import mturk
-from . import s3
+from .mturk import *
+from .s3 import *

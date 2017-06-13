@@ -3,7 +3,8 @@
 # S.D.G
 
 # Imports
-from setuptools import setup
+from setuptools import setup, find_packages
+from turkmarker.__init__ import __version__ as ver
 
 __author__ = 'Ben Johnston'
 __revision__ = '0.1'
@@ -16,7 +17,7 @@ setup(
     url='',
     author='',
     author_email='',
-    version=__revision__,
-    packages=['turkmarker'],
+    version=ver,
+    packages=find_packages(),
     license=open('LICENSE.md').read(),
     long_description=open('README.md').read())

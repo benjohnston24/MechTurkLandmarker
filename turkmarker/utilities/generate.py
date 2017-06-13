@@ -8,7 +8,6 @@ and the correct position within the landmarking system"""
 # Imports
 import json
 import os
-import pandas as pd
 import numpy as np
 from PIL import Image, ImageDraw, ImageFont
 from string import Template
@@ -52,11 +51,11 @@ class GenerateSite(object):
     def generate_config_json(self):
         """Generate a json file containing the number of points"""
 
-        lmrks_file = self.config['LANDMARK-DETAILS']['TEMPLATE_LANDMARKS']
+        landmarks_file = self.config['LANDMARK-DETAILS']['TEMPLATE_LANDMARKS']
         config_json = self.config['LANDMARK-DETAILS']['CONFIG_JSON']
 
-        df = pd.read_csv(lmrks_file).values
-        num_pts = df.shape[0]
+        lmrks = np.genfromtxt(landmarks_file, delimiter=',') 
+        num_pts = lmrks.shape[0]
         json_data = OrderedDict() 
         for i in range(num_pts):
             json_data["P%d" % (i + 1)] = {"kind": "point"}
@@ -72,7 +71,7 @@ class GenerateSite(object):
         then do not apply the positional requirement
 
         """
-        lmrks_file = self.config['LANDMARK-DETAILS']['TEMPLATE_LANDMARKS']
+        landmarks_file = self.config['LANDMARK-DETAILS']['TEMPLATE_LANDMARKS']
         check_js = self.config['LANDMARK-DETAILS']['CHECK_JS']
 
         assert((buff > 0) and (buff <= 1))
@@ -81,22 +80,22 @@ class GenerateSite(object):
         with open(check_js, "w") as f:
             f.write(CHECK_JS_INTRO)
 
-        df = pd.read_csv(lmrks_file).values
+        lmrks = np.genfromtxt(landmarks_file, delimiter=',') 
         limit = 1 - buff
 
         rules = {}
         rules[X] = []
         rules[Y] = []
         # Iterate each point, comparing against the previous
-        for i in range(1, df.shape[0]):
+        for i in range(1, lmrks.shape[0]):
             j = i - 1
-            ratios = df[i] / (df[j] + eps)
+            ratios = lmrks[i] / (lmrks[j] + eps)
 
             for direction in [X, Y]:
                 # The directional distance between the points is big enough to validate
                 if abs(1 - ratios[direction]) >= buff:
                     #Check which is smallest and apply the rule 
-                    if df[i][direction] > df[j][direction]:
+                    if lmrks[i][direction] > lmrks[j][direction]:
                         if [i, j] not in rules[direction]:
                             rules[direction].append([i, j])
                     else:
@@ -147,7 +146,7 @@ class GenerateSite(object):
             radius = self.config['LANDMARK-DETAILS']['RADIUS']
 
         # Load landmarks
-        lmrks = pd.read_csv(landmarks_file).values
+        lmrks = np.genfromtxt(landmarks_file, delimiter=',') 
 
         # Iterate through all landmarks
         for i in range(lmrks.shape[0]):

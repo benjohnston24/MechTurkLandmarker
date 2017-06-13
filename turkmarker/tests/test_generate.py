@@ -9,8 +9,7 @@ import os
 import unittest
 from unittest import skip
 from unittest.mock import Mock, mock_open
-import numpy as nps
-import pandas as pd
+import numpy as np
 from collections import OrderedDict
 from unittest.mock import MagicMock, patch
 from turkmarker.utilities.base import parse_sys_config,\
@@ -24,7 +23,7 @@ __date__ = 'Thursday 1 June  10:57:35 AEST 2017'
 __license__ = 'BSD 3-Clause'
 
 
-js_landmarks = pd.DataFrame(
+js_landmarks = np.array(
 [
     [100, 200],
     [101, 402],
@@ -64,7 +63,7 @@ class TestGenerateFiles(unittest.TestCase):
         self.assertEqual(config['KEYS']['AWS-ID'], '1234')
         self.assertEqual(config['KEYS']['AWS-KEY'], '456')
 
-    @patch('pandas.read_csv', return_value=pd.DataFrame([[1,2],[3,4]]))
+    @patch('numpy.genfromtxt', return_value=np.array([[1,2],[3,4]]))
     @patch('PIL.Image.Image.save')
     def test_correct_num_images_produces(self, mock_img, mock_pts):
 
@@ -85,8 +84,7 @@ class TestGenerateFiles(unittest.TestCase):
             mock_img.call_args_list[i].assert_called_with(
                 os.path.join(DEFAULT_SAVE_FOLDER, 'lmrk_P%d.jpg' % i))
 
-
-    @patch('pandas.read_csv', return_value=pd.DataFrame([[1,2],[3,4]]))
+    @patch('numpy.genfromtxt', return_value=np.array([[1,2],[3,4]]))
     @patch('json.dump')
     @patch('builtins.open')
     def test_correct_json_points(self, mock_file, mock_json, mock_pts):
@@ -116,7 +114,7 @@ class TestGenerateFiles(unittest.TestCase):
         self.assertEqual(mock_json.call_args_list[0][0][0], expected_results)
         self.assertEqual(mock_json.call_args_list[0][1], {'indent': 4})
 
-    @patch('pandas.read_csv', return_value=js_landmarks) 
+    @patch('numpy.genfromtxt', return_value=js_landmarks)
     def test_correct_javascript_rules(self, mock_pts):
 
         config = {
