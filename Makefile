@@ -31,8 +31,7 @@ build:
 #		python -m markdown -o html protocol.md > protocol.html
 
 test: 
-	cd turkmarker &&\
-		MECHTURK_ID=1234 MECHTURK_KEY=456 nosetests -s --with-coverage --cover-html --cover-package=turkmarker &&\
+	MECHTURK_ID=1234 MECHTURK_KEY=456 nosetests -s --with-coverage --cover-html --cover-package=turkmarker &&\
 		coverage xml -i
 
 upload:
