@@ -9,6 +9,7 @@ import boto3
 import os
 import xmltodict
 import json
+import numpy as np
 from collections import OrderedDict
 from ast import literal_eval
 from string import Template
@@ -45,14 +46,6 @@ class AWSMTurk(object):
             aws_secret_access_key=self.config['KEYS']['AWS-KEY'],
         )
         self.connected = True
-
-    def get_balance(self):
-        """Print the mechanical turk balance"""
-
-        if not self.connected:
-            self.connect()
-
-        return self.mturk.get_account_balance()['AvailableBalance']
 
     def create_HIT(self, question):
         """Create a HIT
@@ -127,13 +120,11 @@ class AWSMTurk(object):
 
         return results
 
-    def save_results_to_file(self, hit_id,
-        #TODO Look into pagination, 100 is max results that can be returned at a time
-        max_results=100, 
-        status=['Submitted', 'Approved', 'Rejected']):
-        """Save the results to a file"""
+    def _manage_results_folder(self, hit_id):
+        """Organise the results folder and return path"""
 
         results_folder = self.config['LANDMARK-DETAILS']['RESULTS_FOLDER']
+
         # If the folder doesnt exist, make it
         if not os.path.exists(results_folder):
             os.mkdir(results_folder)
@@ -143,25 +134,24 @@ class AWSMTurk(object):
         if not os.path.exists(hit_results_folder):
             os.mkdir(hit_results_folder)
 
-        # Get HIT Information
-        hit_info = self.mturk.get_hit(HITId=hit_id)['HIT']
-        hit_results = self.get_results(hit_id, max_results, status)
+        return hit_results_folder
 
-        if self.debug_level:
-            print(hit_info['Title'])
-            print("%d results" % hit_results['NumResults'])
+    def _prepare_assignment_info(self, hit_id, hit_info, hit_results):
+        """Prepare assignment information for saving"""
 
-        marks = None
+        hit_results_folder = self._manage_results_folder(hit_id)
+
         for hit_result in hit_results['Assignments']:
             result_dict = {}
             result_dict['Title'] = hit_info['Title']
-            result_dict['Desription'] = hit_info['Description']
+            result_dict['Description'] = hit_info['Description']
             result_dict['CreationTime'] = str(hit_info['CreationTime'])
             result_dict['WorkerId'] = hit_result['WorkerId']
             result_dict['AssignmentId'] = hit_result['AssignmentId']
             result_dict['AssignmentStatus'] = hit_result['AssignmentStatus']
             result_dict['AcceptTime'] = str(hit_result['AcceptTime'])
-            result_dict['Answers'] = []
+            result_dict['Answer'] = hit_result['Answer'] 
+            result_dict['Answers'] = [] 
             savename = "{}_{}".format(
                     datetime.now().strftime("%Y-%m-%d-%H:%M:%S"),
                     hit_result['WorkerId'])
@@ -171,33 +161,36 @@ class AWSMTurk(object):
                 os.mkdir(save_folder)
             savename = os.path.join(save_folder, savename)
 
-            if self.debug_level:
-                print("Assignment ID: %s" % result_dict['AssignmentId'])
+            yield result_dict, savename
 
-            # Parse Answer into
+    def save_results_to_file(self, hit_id,
+        max_results=100, 
+        status=['Submitted', 'Approved', 'Rejected']):
+        """Save the results to a file"""
+        #TODO Look into pagination, 100 is max results that can be returned at a time
+
+        if not self.connected:
+            self.connect()
+
+        hit_info = self.mturk.get_hit(HITId=hit_id)['HIT']
+        hit_results = self.get_results(hit_id, max_results, status)
+
+        marks = None
+        for hit_result, savename in self._prepare_assignment_info(hit_id, hit_info, hit_results):
+           # Parse Answer into
             xml_dict = xmltodict.parse(hit_result['Answer'])
             # There are multiple fields in the HIT layout
             for field in xml_dict['QuestionFormAnswers']['Answer']:
-                result_dict['Answers'].append(field)
+                hit_result['Answers'].append(field)
                 if hasattr(field, 'keys'):
                     if 'marks' in field['QuestionIdentifier']:
                         marks = field['FreeText']
                         marks = literal_eval(marks)
-                        organised_marks = OrderedDict()
+                        vals = np.zeros((len(marks.keys()), 2))
                         for i in range(1, len(marks.keys()) + 1):
-                            organised_marks['P%d' % i] = marks['P%d' % i]
-                        df = np.array(organised_marks).T
-                        df.to_csv("%s.csv" % savename, index=False)
+                            vals[i - 1,:] = marks['P%d' % i]
+                        np.savetxt("%s.csv" % savename, vals, delimiter=',')
 
+            del hit_result['Answer']
             with open("%s.json" % savename, 'w') as f:
-                f.write(json.dumps(result_dict))
-
-            # Generate images of the answers in the save folder
-            generate_lmrk_images(
-                    image_file=self.config['LANDMARK-DETAILS']['DISPLAY_FACE'],
-                    landmarks_file="%s.csv" % savename,
-                    base_colour=self.config['LANDMARK-DETAILS']['BASE_COLOUR'],
-                    hi_colour=self.config['LANDMARK-DETAILS']['HI_COLOUR'],
-                    save_folder=save_folder,
-                    radius=self.config['LANDMARK-DETAILS']['RADIUS'])
-
+                f.write(json.dumps(hit_result))

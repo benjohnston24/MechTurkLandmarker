@@ -34,8 +34,7 @@ class TestS3API(unittest.TestCase):
         self.obj = AWSS3(self.config, debug_level=1)
 
     @patch('boto3.client', autospec=boto3.client)
-    @patch('builtins.print')
-    def test_connect(self, print_mock, boto_mock):
+    def test_connect(self, boto_mock):
         """Test connected Flag is set"""
 
         self.obj.connect()
