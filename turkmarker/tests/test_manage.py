@@ -43,7 +43,7 @@ class TestArgs(unittest.TestCase):
         self.assertEqual(options.debug_level, 1)
 
 
-class TestMain(unittestTestCase):
+class TestMain(unittest.TestCase):
 
     def setUp(self):
         pass
