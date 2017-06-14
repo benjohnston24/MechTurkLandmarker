@@ -43,7 +43,7 @@ def get_options(argv=None):
     parser.add_argument('-v', '--verbose', dest='debug_level', type=int,
         help='Verbocity 0: No debugging, 1: sys.stdout debugging', required=False, default=0)
 
-    return parser.parse_args()
+    return parser.parse_args(argv)
 
 def _main(args=None):
 
@@ -52,7 +52,6 @@ def _main(args=None):
     if args.new_project:
         shutil.copytree(TEMPLATE_DATA, args.new_project)
         return
-
 
     config = parse_sys_config(args.config_file)
     # Create objects for later use
