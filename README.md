@@ -1,4 +1,4 @@
-# MechTurkLandmarker  [![travisCI](https://travis-ci.org/benjohnston24/MechTurkLandmarker.svg?branch=master)](https://travis-ci.org/benjohnston24/MechTurkLandmarker)  [![codecov](https://codecov.io/gh/benjohnston24/MechTurkLandmarker/branch/master/graph/badge.svg)](https://codecov.io/gh/benjohnston24/MechTurkLandmarker)
+# turklandmarker  [![travisCI](https://travis-ci.org/benjohnston24/turklandmarker.svg?branch=master)](https://travis-ci.org/benjohnston24/turklandmarker)  [![codecov](https://codecov.io/gh/benjohnston24/turklandmarker/branch/master/graph/badge.svg)](https://codecov.io/gh/benjohnston24/turklandmarker)
 ## Manual Image Landmarking in Amazon Mechanical Turk
 
 MechTurkLandmarker is a web-based image landmarking tool intended for use with Amazon Mechanical Turk.  With MechTurkLandmarker you can easily submit tasks to Amazon Mechanical Turk, allowing for many people to manually identify landmarks of interest on an image. This automatically 'package' generates all of the
@@ -14,7 +14,7 @@ future with continued development, if there is sufficient demand.  For now, simp
 install all the requirements.  It is always recommended to use a virtualenv when installing all requirements.
 
 ```
-git clone git@github.com:benjohnston24/MechTurkLandmarker.git
+git clone git@github.com:benjohnston24/turkmarker.git
 cd MechTurkLandmarker
 pip install -r requirements.txt
 ```

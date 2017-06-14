@@ -12,7 +12,7 @@ from turkmarker.utilities.base import TEMPLATE_DATA
 __author__ = 'Ben Johnston'
 __revision__ = '0.1'
 __date__ = 'Wednesday 14 June  16:33:58 AEST 2017'
-__license__ = 'MPL v2.0'
+__license__ = 'BSD 3-Clause'
 
 
 class TestArgs(unittest.TestCase):

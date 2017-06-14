@@ -13,12 +13,14 @@ __license__ = 'BSD 3-Clause'
 
 setup(
     name='turkmarker',
-    description='',
-    url='',
-    author='',
-    author_email='',
+    description='Image landmarking system for Amazon Mechanical Turk',
+    url='https://github.com/benjohnston24/turkmarker',
+    author='Ben Johnston',
+    author_email='bjohnston24@gmail.com',
     version=ver,
-    packages=find_packages(),
+    packages=find_packages(exclude=[
+        'tests', 'docs', 'contrib',
+    ]),
     package_data = {
         'turkmarker': ['data/*',
                        'data/static/*'],
@@ -28,5 +30,21 @@ setup(
             'turk-admin = turkmarker.manage:_main',
         ]
     },
-    license=open('LICENSE.md').read(),
-    long_description=open('README.md').read())
+    install_requires = [
+        'boto3',
+        'numpy',
+        'pillow',
+        'xmltodict',
+    ],
+    license='BSD 3-Clause',
+    long_description='https://github.com/benjohnston24/turkmarker',
+    keywords='image, landmarking, Mechanical Turk',
+    classifiers = [
+        'Development Status :: 1 - Planning',
+        'Intended Audience :: Science/Research',
+        'Topic :: Scientific/Engineering',
+        'Topic :: Scientific/Engineering :: Information Analysis',
+        'License :: OSI Approved :: BSD License',
+        'Programming Language :: Python :: 3.5',
+    ]
+)
