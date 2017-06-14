@@ -5,16 +5,14 @@
 """Python script to deploy site to AWS S3 and Mechanical Turk"""
 
 # Imports
-import sys; import pprint
-pprint.pprint(sys.path)
+import os
 import argparse
-import pdb;pdb.set_trace()
-from utilities.base import parse_sys_config,\
-    UTIL_FOLDER, DEFAULT_SYS_CONFIG, DEFAULT_SAVE_FOLDER
-from utilities.base import parse_sys_config, DEFAULT_SYS_CONFIG
-from utilities.generate import GenerateSite
-from aws.s3 import AWSS3 
-from aws.mturk import AWSMTurk
+import shutil
+from .utilities.base import parse_sys_config,\
+    TEMPLATE_DATA
+from .utilities.generate import GenerateSite
+from .aws.s3 import AWSS3 
+from .aws.mturk import AWSMTurk
 
 __author__ = 'Ben Johnston'
 __revision__ = '0.1'
@@ -25,11 +23,12 @@ __license__ = 'BSD 3-Clause'
 def get_options(argv=None):
 
     parser = argparse.ArgumentParser(
-        description="Script to automate MechTurkLandmarker build,"
-        " deployment and visualising the results",
+        description="turkmarker - Mechanical Turk Landmarking",
         epilog="See https://github.com/benjohnston24/MechTurkLandmarker"
         " for more information")
 
+    parser.add_argument('-n', '--newproject', dest='new_project',
+        help='Create new project with project name', required=False, type=str)
     parser.add_argument('-b', '--build', dest='build', action='store_true',
         help='Build the site', required=False)
     parser.add_argument('-u', '--upload', dest='upload', action='store_true',
@@ -38,10 +37,8 @@ def get_options(argv=None):
         help='Create mechanical turk task', required=False)
     parser.add_argument('-r', '--results', dest='results', action='store_true',
         help='Get and store all available mechanical turk results', required=False)
-    parser.add_argument('-d', '--display', dest='display', action='store_true',
-        help='Generate display images of results', required=False)
     parser.add_argument('-c', '--config', type=str, dest='config_file',
-        default=DEFAULT_SYS_CONFIG,
+        default='.configrc',
         help='Specify configuration file', required=False)
     parser.add_argument('-v', '--verbose', dest='debug_level', type=int,
         help='Verbocity 0: No debugging, 1: sys.stdout debugging', required=False, default=0)
@@ -52,6 +49,11 @@ def _main(args=None):
 
     args = get_options(args)
 
+    if args.new_project:
+        shutil.copytree(TEMPLATE_DATA, args.new_project)
+        return
+
+
     config = parse_sys_config(args.config_file)
     # Create objects for later use
     s3 = AWSS3(config=config,
@@ -59,12 +61,11 @@ def _main(args=None):
     mturk = AWSMTurk(config=config,
         debug_level=args.debug_level)
 
-
     # Build the site
     if args.build:
         site = GenerateSite(config)
         site.generate_lmrk_images(
-            image_file=config['LANDMARK-DETAILS']['TEMPLATE_FACE'],
+            image_file=config['LANDMARK-DETAILS']['TEMPLATE_IMAGE'],
             landmarks_file=config['LANDMARK-DETAILS']['TEMPLATE_LANDMARKS'],
             base_colour=config['LANDMARK-DETAILS']['BASE_COLOUR'],
             hi_colour=config['LANDMARK-DETAILS']['HI_COLOUR'],
@@ -92,10 +93,5 @@ def _main(args=None):
         for hit in hits:
             mturk.save_results_to_file(hit[0])
 
-    # Display the results
-    if args.display:
-        pass
-
 if __name__ == "__main__":
     _main()
-

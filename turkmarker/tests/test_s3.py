@@ -123,6 +123,7 @@ class TestS3API(unittest.TestCase):
             'test.eot',
             'test.woff',
             'test.ttf',
+            'test.txt',
         ]
 
         def produce_files(*args, **kwargs):

@@ -23,5 +23,10 @@ setup(
         'turkmarker': ['data/*',
                        'data/static/*'],
     },
+    entry_points = {
+        'console_scripts': [
+            'turk-admin = turkmarker.manage:_main',
+        ]
+    },
     license=open('LICENSE.md').read(),
     long_description=open('README.md').read())

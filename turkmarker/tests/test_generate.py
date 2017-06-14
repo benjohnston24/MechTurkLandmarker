@@ -13,7 +13,7 @@ import configparser
 import numpy as np
 from collections import OrderedDict
 from turkmarker.utilities.base import parse_sys_config,\
-    DATA_FOLDER, DEFAULT_SYS_CONFIG, DEFAULT_SAVE_FOLDER
+    TEMPLATE_DATA, DEFAULT_SYS_CONFIG, DEFAULT_SAVE_FOLDER
 from turkmarker.utilities.generate import GenerateSite,\
     CHECK_JS_INTRO, X_TEMPLATE, Y_TEMPLATE, JS_END
 
@@ -77,11 +77,6 @@ class MockConfigParser(configparser.ConfigParser):
 class TestGenerateFiles(unittest.TestCase):
 
 
-    def test_default_config_exists(self):
-        """Test the default config file exists"""
-
-        self.assertTrue(os.path.exists(DEFAULT_SYS_CONFIG))
-
     def test_read_config(self):
         """Check config file read"""
 
@@ -105,7 +100,8 @@ class TestGenerateFiles(unittest.TestCase):
         self.assertEqual(config['KEYS']['AWS-ID'], '1234')
         self.assertEqual(config['KEYS']['AWS-KEY'], '456')
 
-    def test_default_override(self):
+    @patch('os.path.exists', side_effect=[True])
+    def test_default_override(self, exists_mock):
         """Test parse_sys_config returns non-default values"""
 
         with patch('configparser.ConfigParser', MockConfigParser) as m:
@@ -141,8 +137,8 @@ class TestGenerateFiles(unittest.TestCase):
 
         config = {
             'LANDMARK-DETAILS': {
-                'TEMPLATE_IMAGE': os.path.join(DATA_FOLDER, 'template_face.png'), 
-                'TEMPLATE_LANDMARKS': os.path.join(DATA_FOLDER, 'template_landmarks.csv'), 
+                'TEMPLATE_IMAGE': os.path.join(TEMPLATE_DATA, 'template_face.png'), 
+                'TEMPLATE_LANDMARKS': os.path.join(TEMPLATE_DATA, 'template_landmarks.csv'), 
                 'STATIC_FOLDER': DEFAULT_SAVE_FOLDER,
                 'RADIUS': 3, 
                 'BASE_COLOUR': '#FFFFFF', 
@@ -164,7 +160,7 @@ class TestGenerateFiles(unittest.TestCase):
 
         config = {
             'LANDMARK-DETAILS': {
-                'TEMPLATE_LANDMARKS': os.path.join(DATA_FOLDER, 'template_landmarks.csv'), 
+                'TEMPLATE_LANDMARKS': os.path.join(TEMPLATE_DATA, 'template_landmarks.csv'), 
                 'CONFIG_JSON': os.path.join(DEFAULT_SAVE_FOLDER, 'config.json'),
                 }
             }
@@ -190,7 +186,7 @@ class TestGenerateFiles(unittest.TestCase):
 
         config = {
             'LANDMARK-DETAILS': {
-                'TEMPLATE_LANDMARKS': os.path.join(DATA_FOLDER, 'template_landmarks.csv'), 
+                'TEMPLATE_LANDMARKS': os.path.join(TEMPLATE_DATA, 'template_landmarks.csv'), 
                 'CHECK_JS': os.path.join(DEFAULT_SAVE_FOLDER, 'check.js'),
                 }
             }

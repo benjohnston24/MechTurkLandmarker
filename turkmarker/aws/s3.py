@@ -7,6 +7,7 @@
 # Imports
 import boto3
 import os
+from collections import defaultdict
 
 __author__ = 'Ben Johnston'
 __revision__ = '0.1'
@@ -27,6 +28,9 @@ CONTENT_TYPES = {
     '.woff' : 'application/font-woff',
     '.ttf' : 'application/x-font-ttf',
 }
+
+CONTENT_TYPES = defaultdict(lambda: 'text/plain',
+                            CONTENT_TYPES)
 
 
 class AWSS3(object):

@@ -34,15 +34,16 @@ HighlightColour = #FFFF00
 # ResultsFolder = ./results
 
 [AWS-MTURK]
-# EndPoint = https://mturk-requester-sandbox.us-east-1.amazonaws.com
+EndPoint = https://mturk-requester-sandbox.us-east-1.amazonaws.com
 # Uncomment the next line for production use
-EndPoint = https://mturk-requester.us-east-1.amazonaws.com
+# EndPoint = https://mturk-requester.us-east-1.amazonaws.com
 Region = us-east-1
 
+# Configure these details!
 # HIT Details
-HIT_Title = Facial Landmarking (~5 minutes!)
-HIT_Description = Identify specified points on a face
-HIT_Keywords = facial, landmarking, image, points, quick
+HIT_Title = Title of Task 
+HIT_Description = Description of Task 
+HIT_Keywords = Keywords for Task 
 
 # Payment per HIT (AWS fees not included)
 HIT_Reward = 1.00 

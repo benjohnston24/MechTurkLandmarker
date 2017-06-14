@@ -16,12 +16,13 @@ __license__ = 'MPL v2.0'
 
 
 # Default variables
-DATA_FOLDER = pkg_resources.resource_filename('turkmarker', 'data/') 
+TEMPLATE_DATA = pkg_resources.resource_filename('turkmarker', 'data/') 
+DATA_FOLDER = os.getcwd()
 DEFAULT_LMRKS_FILE = os.path.join(DATA_FOLDER, "template_landmarks.csv")
 # Need to change this when creating turkmarker-admin
 DEFAULT_SAVE_FOLDER = os.path.join(DATA_FOLDER, 'static')
 # Need to move this
-DEFAULT_RESULTS_FOLDER = os.path.join(os.path.dirname(DATA_FOLDER), 'results')
+DEFAULT_RESULTS_FOLDER = os.path.join(DATA_FOLDER, 'results')
 DEFAULT_SYS_CONFIG = os.path.join(DATA_FOLDER, '.configrc')
 
 # Consider adding to default config file
