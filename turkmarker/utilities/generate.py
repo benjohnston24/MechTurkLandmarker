@@ -146,7 +146,8 @@ class GenerateSite(object):
             radius = self.config['LANDMARK-DETAILS']['RADIUS']
 
         # Load landmarks
-        lmrks = np.genfromtxt(landmarks_file, delimiter=',') 
+        lmrks = np.genfromtxt(landmarks_file, delimiter=',',
+                skip_header=True)
 
         # Iterate through all landmarks
         for i in range(lmrks.shape[0]):
