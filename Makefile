@@ -22,13 +22,10 @@ help:
 	&& echo "make help - This help" \
 	&& echo "make test - Execute unittests" \
 
-.PHONY: clean
-
-all: build
+.PHONY: all build clean
 
 build:
-	cd turkmarker && python turkmarker.py -b
-#		python -m markdown -o html protocol.md > protocol.html
+	cd turkmarker && python manage.py -b
 
 test: 
 	MECHTURK_ID=1234 MECHTURK_KEY=456 nosetests -s --with-coverage --cover-html --cover-package=turkmarker &&\

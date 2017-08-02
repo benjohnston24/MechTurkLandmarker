@@ -54,7 +54,11 @@ class GenerateSite(object):
         landmarks_file = self.config['LANDMARK-DETAILS']['TEMPLATE_LANDMARKS']
         config_json = self.config['LANDMARK-DETAILS']['CONFIG_JSON']
 
-        lmrks = np.genfromtxt(landmarks_file, delimiter=',') 
+        lmrks = np.genfromtxt(
+            landmarks_file,
+            delimiter=',',
+            skip_header=True,
+            ) 
         num_pts = lmrks.shape[0]
         json_data = OrderedDict() 
         for i in range(num_pts):
@@ -80,7 +84,10 @@ class GenerateSite(object):
         with open(check_js, "w") as f:
             f.write(CHECK_JS_INTRO)
 
-        lmrks = np.genfromtxt(landmarks_file, delimiter=',') 
+        lmrks = np.genfromtxt(
+            landmarks_file,
+            delimiter=',',
+            skip_header=True) 
         limit = 1 - buff
 
         rules = {}
@@ -153,13 +160,7 @@ class GenerateSite(object):
         for i in range(lmrks.shape[0]):
             img = Image.open(image_file)
             draw = ImageDraw.Draw(img)
-            # Plot all the points
-            for pts in lmrks:
-                draw.ellipse((
-                    pts[0] - (radius / 2), pts[1] - (radius / 2),
-                    pts[0] + radius, pts[1] + radius),
-                    fill=base_colour)
-
+            # Only plot the landmark to be selected by the operator
             pts = lmrks[i]
             draw.ellipse((
                 pts[0] - (radius / 2), pts[1] - (radius / 2),
@@ -169,8 +170,9 @@ class GenerateSite(object):
                 "P%d" % (i + 1),
                 fill=hi_colour, font=SANS16)
 
-            draw.text((10, 10),
-                "DO NOT CLICK ON THIS IMAGE",
-                fill=base_colour, font=SANS16)
+            if False:
+                draw.text((10, 10),
+                    "DO NOT CLICK ON THIS IMAGE",
+                    fill=base_colour, font=SANS16)
 
             img.save(os.path.join(save_folder,"lmrk_P%d.jpg" % (i + 1)))
