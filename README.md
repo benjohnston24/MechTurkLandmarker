@@ -1,4 +1,4 @@
-# turkmarker  [![travisCI](https://travis-ci.org/benjohnston24/turkmarker.svg?branch=master)](https://travis-ci.org/benjohnston24/turkmarker)  [![codecov](https://codecov.io/gh/benjohnston24/turkmarker/branch/master/graph/badge.svg)](https://codecov.io/gh/benjohnston24/turkmarker)
+# turkmarker  [![Build Status](https://travis-ci.org/doc-E-brown/turkmarker.svg?branch=master)](https://travis-ci.org/doc-E-brown/turkmarker) [![codecov](https://codecov.io/gh/doc-E-brown/turkmarker/branch/master/graph/badge.svg)](https://codecov.io/gh/doc-E-brown/turkmarker)
 ## Manual Image Landmarking in Amazon Mechanical Turk
 
 MechTurkLandmarker is a web-based image landmarking tool intended for use with Amazon Mechanical Turk.  With MechTurkLandmarker you can easily submit tasks to Amazon Mechanical Turk, allowing for many people to manually identify landmarks of interest on an image. This automatically 'package' generates all of the
@@ -19,7 +19,7 @@ pip install turkmarker
 
 ## Configuration Files
 
-* [.configrc](https://github.com/benjohnston24/MechTurkLandmarker/blob/master/.configrc) - configuration file for the
+* [.configrc](https://github.com/doc-E-brown/MechTurkLandmarker/blob/master/.configrc) - configuration file for the
   system, modify this file to change aspects of operation and details of the Mechanical Turk HIT tasks or S3 Buckets. 
 
 ## Building
